@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #22221b;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --primary-color: #73267e;
+  --secondary-color: #84568a;
+  --border-radius: 10px;
+  --main-bg-color: #22221b;
+  --main-border-color: #eaeaea;
+}
+
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}

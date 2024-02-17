@@ -1,0 +1,110 @@
+.imageContainer {
+  width: 300px;
+  object-fit: cover;
+}
+
+.loginImg {
+  max-width: 100%;
+  border-radius: 10px 0 0 10px;
+}
+
+.loginFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 25px;
+  padding: 10px;
+  width: 65%;
+}
+
+/* --------------------Google Button ------------------ */
+
+.googleBtn {
+  position: relative;
+  display: block;
+  background: transparent;
+  width: 350px;
+  height: 80px;
+  text-align: center;
+  font-size: 20px;
+  text-decoration: none;
+  color: #fff;
+  margin: 40px auto;
+  font-family: Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.googleBtn:before,
+.googleBtn:after {
+  position: absolute;
+  content: "";
+  width: 350px;
+  left: 0px;
+  height: 34px;
+  z-index: 0;
+  transition: all 0.2s;
+  /* background-color: rgb(16, 18, 24, 0.3); */
+  background-color: rgb(16, 19, 24);
+}
+.googleBtnText {
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 191px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  padding: 0;
+  box-shadow: 0px 0px 32px 47px #090b0f;
+  background: #090b0f;
+}
+.googleBtn:before {
+  top: 3px;
+}
+.googleBtn:after {
+  bottom: 4.5px;
+}
+.googleBtn:hover > .googleBtnText {
+  background: #090b0f;
+}
+.googleBtn:hover:before {
+  width: 380px;
+  left: -15px;
+  top: 0px;
+  transform: perspective(15px) rotateX(3deg);
+}
+.googleBtn:hover:after {
+  width: 380px;
+  left: -15px;
+  transform: perspective(15px) rotateX(-3deg);
+}
+.googleBtn:before,
+.googleBtn:after {
+  border: 3px solid rgb(22, 24, 31);
+}
+.googleBtn:before {
+  border-bottom: none;
+}
+.googleBtn:after {
+  border-top: none;
+}
+
+/* Button hover styles */
+
+.googleBtn:hover:before,
+.googleBtn:hover:after {
+  background-color: rgb(16, 19, 24);
+}

@@ -1,0 +1,41 @@
+.imageCropperContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+.cropperContainer {
+  width: 100%;
+  height: 80%;
+}
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.cropBtn,
+.cancelBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.cropBtn {
+  background: var(--primary-color);
+}
+.cancelBtn {
+  background: white;
+  color: black;
+}
+.cropBtn:hover,
+.cancelBtn:hover {
+  filter: brightness(0.6);
+}
+.actionBtns{
+  display: flex;
+  gap: 10px;
+}
