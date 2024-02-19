@@ -1,0 +1,15 @@
+.errorPageContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorPageContainer > h1 {
+  font-size: 100px;
+}
+.errorPageContainer > p {
+  font-size: 34px;
+}

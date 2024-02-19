@@ -41,7 +41,7 @@ function App() {
     <>
       <AnimatePresence>
         {loadingWall && <LoadingWall key={"Loading-Wall"} />}
-        {!loading && (
+        {!loading ? (
           <>
             <LoadingBar
               color="#c641b5"
@@ -50,6 +50,8 @@ function App() {
             />
             <AppRoutes />
           </>
+        ) : (
+          <LoadingWall key={"Loading-Wallv2"} />
         )}
       </AnimatePresence>
     </>

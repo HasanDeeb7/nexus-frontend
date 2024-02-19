@@ -16,10 +16,11 @@ function Input({
   className,
   container,
   errorMessage = "",
+  onChange = null,
 }) {
   const [isShown, setIsShown] = useState(false);
   function handleChange(e) {
-    removeError(control);
+    isError && removeError(control);
     setValue({ ...value, [e.target.name]: e.target.value });
   }
   function togglePassword() {
@@ -43,7 +44,7 @@ function Input({
               name={control}
               id={control}
               value={value[control]}
-              onChange={handleChange}
+              onChange={onChange ? onChange : handleChange}
               disabled={isDisabled}
               placeholder={`Enter Your ${label}`}
             />

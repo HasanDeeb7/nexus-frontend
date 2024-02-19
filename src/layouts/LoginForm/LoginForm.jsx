@@ -16,22 +16,24 @@ function LoginForm() {
   });
   async function signIn() {
     if (
-      Object.entries(newUser).some((item) => {
+      Object.entries(credentials).some((item) => {
         if (item[1] === "" || !item[1]) {
           setError({ ...error, [item[0]]: true });
           console.log(error);
           return true; // Returning true if the condition is met
         }
-        // return false; // Returning false if the condition is not met
       })
-    )
-      setLoading(true);
+    ) {
+      return;
+    }
+    setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_ENDPOINT}user/login`,
         credentials
       );
       if (response) {
+        console.log(response.data);
         setUser(response.data);
         setLoading(false);
       }
@@ -40,6 +42,7 @@ function LoginForm() {
       setLoading(false);
     }
   }
+
   return (
     <motion.div
       layout
