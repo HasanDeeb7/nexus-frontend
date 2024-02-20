@@ -1,7 +1,7 @@
-import React from "react";
+import style from "./FYPage.module.css";
 
 function FYPage() {
-  return <div>FYPage</div>;
+  return <div className={style.fyPageContainer}>FYPage</div>;
 }
 
 export default FYPage;

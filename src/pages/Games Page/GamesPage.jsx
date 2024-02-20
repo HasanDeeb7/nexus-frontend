@@ -109,7 +109,7 @@ function GamesPage() {
         </header>
         <main className={style.pageContentContainer}>
           <h2>Browse</h2>
-          <section className={style.gamesContainer}>
+          <div className={style.gamesContainer}>
             {games.map((game, idx) => (
               <GameCard
                 game={game}
@@ -118,7 +118,7 @@ function GamesPage() {
                 onClick={() => handleSelectGame(game)}
               />
             ))}
-          </section>
+          </div>
         </main>
         <footer className={style.gamePageFooter}>
           <div className={style.footerContent}>
@@ -140,7 +140,7 @@ function GamesPage() {
                   ))
                 : ""}
             </div>
-            <section className={style.footerActions}>
+            <div className={style.footerActions}>
               <div className={style.footerBtnsContainer}>
                 <button
                   type="button"
@@ -153,7 +153,7 @@ function GamesPage() {
                   Skip
                 </button>
               </div>
-            </section>
+            </div>
           </div>
         </footer>
       </div>

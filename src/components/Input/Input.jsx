@@ -17,6 +17,7 @@ function Input({
   container,
   errorMessage = "",
   onChange = null,
+  placeholder = "",
 }) {
   const [isShown, setIsShown] = useState(false);
   function handleChange(e) {
@@ -46,7 +47,7 @@ function Input({
               value={value[control]}
               onChange={onChange ? onChange : handleChange}
               disabled={isDisabled}
-              placeholder={`Enter Your ${label}`}
+              placeholder={placeholder}
             />
             {required && <div className={style.requiredInput}></div>}
             {type === "password" &&

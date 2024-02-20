@@ -1,0 +1,80 @@
+.createPage {
+  height: 100vh;
+  position: relative;
+  padding: 20px 50px;
+}
+.mainContentContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.PostFormConatiner {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid var(--primary-color);
+  padding: 30px;
+  border-radius: 16px;
+  background-color: #121212;
+}
+
+.customOptionContainer {
+  background-color: var(--main-bg-color);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.optionText {
+  /* color: red; */
+}
+.customOptionImage {
+  width: 50px;
+}
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+.selectGameImage {
+  width: 50px;
+}
+.gameName {
+  transition: all 0.3s;
+}
+.gameInfo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+  transition: all 0.3s;
+}
+.gameInfo:hover {
+  background-color: var(--primary-color);
+}
+.postType {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+  transition: all 0.3s;
+}
+.postType:hover {
+  background-color: var(--primary-color);
+}
+.spoilerControl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+}

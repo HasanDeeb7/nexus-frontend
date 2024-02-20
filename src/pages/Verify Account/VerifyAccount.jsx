@@ -62,14 +62,14 @@ function VerifyAccount() {
           <div className={style.contentWrapper}>
             {!codeSent ? (
               <>
-                <section className={style.modalHeader}>
+                <div className={style.modalHeader}>
                   <h1>Verify your account</h1>
                   <p>
                     We will send a verification code to{" "}
                     <span className={style.boldEmail}>{user.email}</span>
                   </p>
-                </section>
-                <section className={style.actions}>
+                </div>
+                <div className={style.actions}>
                   <button
                     type="button"
                     className={style.primaryBtn}
@@ -78,13 +78,13 @@ function VerifyAccount() {
                   >
                     Send Code
                   </button>
-                </section>
+                </div>
               </>
             ) : (
               <>
-                <section>
+                <div>
                   <h2>Check Your Inbox</h2>
-                </section>
+                </div>
                 <p>
                   We have sent the code to
                   <span className={style.boldEmail}>
@@ -92,7 +92,7 @@ function VerifyAccount() {
                   </span>
                   .
                 </p>
-                <section className={style.inputsContainer}>
+                <div className={style.inputsContainer}>
                   <VerificationInput
                     length={6}
                     value={verificationCode}
@@ -120,7 +120,7 @@ function VerifyAccount() {
                   >
                     Verify
                   </button>
-                </section>
+                </div>
               </>
             )}
           </div>

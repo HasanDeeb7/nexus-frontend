@@ -1,0 +1,61 @@
+.navBarContainer {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #eaeaea2b;
+  padding: 5px 30px;
+  display: flex;
+  align-items: center;
+}
+.navBarContentContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+.searchContainer {
+  /* flex-grow: 3; */
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 40%;
+  min-width: 200px;
+}
+.navItemsContainer {
+  display: flex;
+  gap: 5px;
+}
+.headerNavItems {
+  list-style: none;
+}
+.searchInput {
+  color: white;
+  padding: 15px 10px;
+  width: 100%;
+  border-radius: 7px;
+  background-color: #0d0f13;
+  outline: none;
+  border: 1px solid transparent;
+  transition: border-color 0.25s ease, outline 0.15s ease;
+}
+.searchIcon {
+  position: absolute;
+  right: 15px;
+}
+.headerNavItem {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+.headerNavItem:hover {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+.notificationsIcon {
+  font-size: 24px;
+}
+.addPostIcon {
+  font-size: 24px;
+}

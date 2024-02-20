@@ -90,7 +90,7 @@ function GameCard({
         />
       <div className={style.helperText}>Add Game</div>
       </figure>
-      <section className={style.gameInfo}>
+      <div className={style.gameInfo}>
         <p className={style.gameName}>{game.name}</p>
         <div className={style.playersPlatforms}>
           <p className={style.numberOfPlayes}>
@@ -102,14 +102,14 @@ function GameCard({
             })}
           </div>
         </div>
-      </section>
-      <section className={style.gameGenres}>
+      </div>
+      <div className={style.gameGenres}>
         {game.genres.slice(0, 2).map((item, idx) => (
-          <section className={style.gameGenre} key={idx}>
+          <div className={style.gameGenre} key={idx}>
             {item.name}
-          </section>
+          </div>
         ))}
-      </section>
+      </div>
     </div>
   );
 }
