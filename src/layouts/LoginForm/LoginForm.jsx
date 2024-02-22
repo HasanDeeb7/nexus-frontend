@@ -5,9 +5,12 @@ import axios from "axios";
 import { useUserStore } from "../../Store/userStore";
 import { easeIn, easeOut, motion } from "framer-motion";
 import HexButton from "../../components/HexButton/HexButton";
-
+import { useNavigate } from "react-router-dom";
+import { useLoadingStore } from "../../Store/loadingStore";
 function LoginForm() {
+  const navigate = useNavigate();
   const { user, setUser } = useUserStore();
+  const { setLoadingWall } = useLoadingStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ username: false, password: false });
   const [credentials, setCredentials] = useState({
@@ -36,6 +39,10 @@ function LoginForm() {
         console.log(response.data);
         setUser(response.data);
         setLoading(false);
+        setLoadingWall(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       }
     } catch (error) {
       console.log(error);

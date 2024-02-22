@@ -10,6 +10,10 @@
   border-radius: 5px;
   user-select: none;
   cursor: pointer;
+  background-color: #121212;
+}
+.inputContainer {
+  position: relative;
 }
 .optionsContainer {
   width: 100%;
@@ -27,4 +31,7 @@
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 10px 5px;
+}
+.inputContainer {
+  width: 100%;
 }

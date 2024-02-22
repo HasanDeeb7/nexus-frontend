@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import style from "./Select.module.css";
 // import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-function Select({ value, getOptions }) {
+function Select({
+  value,
+  getOptions,
+  searchable = false,
+  onChange,
+  placeholder,
+}) {
   const dropDownRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,7 +26,23 @@ function Select({ value, getOptions }) {
     }
   };
 
-  return (
+  return searchable ? (
+    <div
+      className={style.inputContainer}
+      ref={dropDownRef}
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      <input
+        className={style.selectContainer}
+        value={value?.name || value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+      {isOpen && (
+        <section className={style.optionsContainer}>{getOptions()}</section>
+      )}
+    </div>
+  ) : (
     <section
       className={style.selectContainer}
       onClick={() => setIsOpen(!isOpen)}
@@ -32,6 +54,7 @@ function Select({ value, getOptions }) {
       )}
     </section>
   );
+  // </input>
 }
 
 export default Select;
