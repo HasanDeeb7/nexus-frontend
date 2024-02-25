@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLoadingStore } from "../../Store/loadingStore";
 import style from "./FYPage.module.css";
+import { usePostStore } from "../../Store/postStore";
+import axios from "axios";
+import Post from "../../components/Post/Post";
+import PostsLayout from "../../layouts/PostsLayout/PostsLayout";
 
-function FYPage() {
-
-  return <div className={style.fyPageContainer}>FYPage</div>;
+function FYPage({ url }) {
+  return <PostsLayout url={"post/byGames"} />;
 }
 
 export default FYPage;

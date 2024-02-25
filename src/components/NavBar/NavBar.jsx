@@ -1,4 +1,3 @@
-import Input from "../Input/Input";
 import style from "./NavBar.module.css";
 import { LuSearch } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
@@ -22,7 +21,7 @@ function NavBar({ query, setQuery }) {
         <ul className={style.navItemsContainer}>
           <li className={style.headerNavItem} onClick={() => navigate("/post")}>
             <LuPlus className={style.addPostIcon} />
-            Create Post
+            <span className={style.actionLabel}>Create Post</span>
           </li>
           <li className={style.headerNavItem}>
             <TbBellRinging2Filled className={style.notificationsIcon} />

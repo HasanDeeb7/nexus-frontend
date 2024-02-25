@@ -59,3 +59,14 @@
 .addPostIcon {
   font-size: 24px;
 }
+@media (max-width: 426px) {
+  .actionLabel {
+    display: none;
+  }
+  .addPostIcon {
+    display: none;
+  }
+  .searchContainer {
+    min-width: 100px;
+  }
+}

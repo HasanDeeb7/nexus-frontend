@@ -13,13 +13,25 @@ function Layout() {
   }, []);
   const [query, setQuery] = useState({ search: "" });
   return (
-    <>
+    <div className={style.layout}>
       <NavBar query={query} setQuery={setQuery} />
-      <SideBar />
-      <div className={style.pageContent}>
-        <Outlet />
-      </div>
-    </>
+      <section className={style.pageWrapper}>
+        <SideBar />
+        <div className={style.pageContent}>
+          <Outlet />
+        </div>
+        <div
+          style={{
+            width: "20%",
+            height: "100vh",
+            position: "sticky",
+            backgroundColor: "black",
+            right: 0,
+            top: 0,
+          }}
+        >dfaksdfj</div>
+      </section>
+    </div>
   );
 }
 

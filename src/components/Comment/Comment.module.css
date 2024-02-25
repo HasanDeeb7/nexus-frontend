@@ -1,0 +1,53 @@
+.comment {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-block: 40px;
+}
+.commentUser {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.commentUserAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+.commentContentWrapper {
+  padding-left: 20px;
+  margin-left: 15px;
+  border-left: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.commentLike {
+  font-size: 14px;
+  cursor: pointer;
+  height: 100%;
+  transition: all 0.3s;
+}
+.commentLike:hover {
+  color: red;
+}
+.commentLiked {
+  color: red;
+  fill: red;
+}
+.commentActions {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.deleteTrashIcon {
+  margin-left: auto;
+  margin-right: 10px;
+  font-size: 14px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.deleteTrashIcon:hover {
+  color: red;
+}

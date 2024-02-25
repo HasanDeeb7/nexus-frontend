@@ -12,6 +12,7 @@ import ExplorePage from "./pages/Explore Page/ExplorePage";
 import FYPage from "./pages/ForYou Page/FYPage";
 import Layout from "./layouts/Page Layout/Layout";
 import CreatePost from "./pages/Create Post/CreatePost";
+import SinglePost from "./pages/SinglePost/SinglePost";
 function AppRoutes() {
   const { user } = useUserStore();
   return (
@@ -30,12 +31,13 @@ function AppRoutes() {
           }
         >
           <Route path="/avatar" element={<UploadImage />} />
-          <Route path="/games-select" element={<GamesPage />} />
+          <Route path="/select-games" element={<GamesPage />} />
         </Route>
         route
         <Route path="/" element={<Layout />}>
           <Route path="fypage" element={<FYPage />} />
           <Route path="explore" element={<ExplorePage />} />
+          <Route path="comments/:postId" element={<SinglePost />}></Route>
           {/* <Route path="chat" element={<FYPage />} />
           <Route path="fypage" element={<FYPage />} /> */}
         </Route>

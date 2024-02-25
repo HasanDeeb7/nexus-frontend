@@ -1,4 +1,11 @@
 .pageContent {
-  margin-left: 300px;
   margin-top: 50px;
+  width: 100%;
+}
+.layout {
+  position: relative;
+}
+.pageWrapper {
+  display: flex;
+  gap: 20px;
 }

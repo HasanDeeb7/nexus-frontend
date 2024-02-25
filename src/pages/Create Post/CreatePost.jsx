@@ -17,6 +17,7 @@ function CreatePost() {
   const [spoiler, setSpoiler] = useState(false);
   const [caption, setCaption] = useState("");
   const [gameQuery, setGameQuery] = useState("");
+  const [image, setImage] = useState();
   const [debounceTimer, setDebounceTimer] = useState(null);
 
   async function getGames() {
@@ -83,6 +84,12 @@ function CreatePost() {
     setDebounceTimer(newTimer);
   }
   async function createPost() {
+    if (!acceptedFiles || acceptedFiles.length === 0) {
+      console.log("No files selected.");
+      return;
+    }
+    console.log(acceptedFiles);
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_ENDPOINT}post/create`,
@@ -90,7 +97,8 @@ function CreatePost() {
           game: gameQuery,
           caption: caption,
           type: postType,
-          image: acceptedFiles,
+          image: image,
+          isSpoiler: spoiler,
         },
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -152,6 +160,8 @@ function CreatePost() {
             <DragAndDrop
               acceptedFiles={acceptedFiles}
               setAcceptedFiles={setAcceptedFiles}
+              image={image}
+              setImage={setImage}
             />
             <div className={style.spoilerControl}>
               <label htmlFor="spoiler">Mark as a spoiler</label>

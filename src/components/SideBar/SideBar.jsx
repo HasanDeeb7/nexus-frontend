@@ -5,10 +5,11 @@ import { TiCompass } from "react-icons/ti";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { TiBell } from "react-icons/ti";
 import { useUserStore } from "../../Store/userStore";
+import Avvvatars from "avvvatars-react";
 function SideBar() {
   const { user } = useUserStore();
   return (
-    <section>
+    <>
       <div className={style.sideBarContainer}>
         <ul className={style.navItemsContainer}>
           <li className={style.navItemWrapper}>
@@ -19,7 +20,7 @@ function SideBar() {
               }
             >
               <TiHome className={style.navIcon} />
-              <span>Home</span>
+              <span className={style.linkLabel}>Home</span>
             </NavLink>
           </li>
           <li className={style.navItemWrapper}>
@@ -32,7 +33,7 @@ function SideBar() {
               {/* <TiHome className={style.navIcon} /> */}
               <TiCompass className={style.navIcon} />
 
-              <span>Explore</span>
+              <span className={style.linkLabel}>Explore</span>
             </NavLink>
           </li>
           <li className={style.navItemWrapper}>
@@ -43,7 +44,7 @@ function SideBar() {
               }
             >
               <IoChatbubblesOutline className={style.navIcon} />
-              <span>Chat</span>
+              <span className={style.linkLabel}>Chat</span>
             </NavLink>
           </li>
           <li className={style.navItemWrapper}>
@@ -54,7 +55,7 @@ function SideBar() {
               }
             >
               <TiBell className={style.navIcon} />
-              <span>Notification</span>
+              <span className={style.linkLabel}>Notification</span>
             </NavLink>
           </li>
           <li className={style.navItemWrapper}>
@@ -64,17 +65,20 @@ function SideBar() {
                 isActive ? style.activeLink : style.navItem
               }
             >
-              <img
-                src={`${import.meta.env.VITE_ENDPOINT}${user.avatar}`}
-                className={style.userImage}
-              />
-              <span>Profile</span>
+              {user.avatar ? (
+                <img
+                  src={`${import.meta.env.VITE_ENDPOINT}${user.avatar}`}
+                  className={style.userImage}
+                />
+              ) : (
+                <Avvvatars value={user.username} size={34} />
+              )}
+              <span className={style.linkLabel}>Profile</span>
             </NavLink>
           </li>
         </ul>
       </div>
-      <div className={style.ouletContainer}></div>
-    </section>
+    </>
   );
 }
 

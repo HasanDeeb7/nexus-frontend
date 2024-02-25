@@ -74,8 +74,9 @@
   border-radius: 0 0 10px 10px;
 }
 .disclaimer {
-  font-weight: 700;
+  font-weight: 400;
 }
 .disclaimer > a {
   color: red;
+  font-weight: 700;
 }

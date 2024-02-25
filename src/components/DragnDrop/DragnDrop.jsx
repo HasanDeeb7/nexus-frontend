@@ -1,13 +1,14 @@
 import { useDropzone } from "react-dropzone"; // For react-dropzone
 import style from "./DragnDrop.module.css";
 import { LuImagePlus } from "react-icons/lu";
-const DragAndDrop = ({ acceptedFiles, setAcceptedFiles }) => {
+const DragAndDrop = ({ acceptedFiles, setAcceptedFiles, image, setImage }) => {
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
     console.log(file);
     setAcceptedFiles(
       Object.assign({}, file, { preview: URL.createObjectURL(file) })
     );
+    setImage(file);
   };
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
