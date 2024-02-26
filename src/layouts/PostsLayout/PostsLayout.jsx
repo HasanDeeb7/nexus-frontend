@@ -4,19 +4,27 @@ import style from "./PostsLayout.module.css";
 import { usePostStore } from "../../Store/postStore";
 import axios from "axios";
 import Post from "../../components/Post/Post";
+import { useUserStore } from "../../Store/userStore";
 
-function PostsLayout({ url }) {
+function PostsLayout({ url, userId }) {
   const [debounceTimer, setDebounceTimer] = useState(null);
   const { posts, setPosts } = usePostStore();
   const [loading, setLoading] = useState(true);
   const [pageSize, setPageSize] = useState(5);
   const [hasMore, setHasMore] = useState(true);
+  const { user } = useUserStore();
   async function getPosts() {
     console.log(import.meta.env.VITE_ENDPOINT);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_ENDPOINT}${url}`,
-        { params: { pageNumber: 1, pageSize: pageSize } }
+        {
+          params: {
+            pageNumber: 1,
+            pageSize: pageSize,
+            userId: userId || user._id,
+          },
+        }
       );
       if (response) {
         console.log(response.data);
@@ -67,9 +75,8 @@ function PostsLayout({ url }) {
   return (
     !loading && (
       <div className={style.PostsLayoutContainer}>
-        <h2>For You</h2>
         <section className={style.postsSection}>
-          {posts.map((post, idx) => (
+          {posts.reverse().map((post, idx) => (
             <Post post={post} key={idx} />
           ))}
         </section>

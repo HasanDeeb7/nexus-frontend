@@ -7,6 +7,9 @@ import { easeIn, easeOut, motion } from "framer-motion";
 import HexButton from "../../components/HexButton/HexButton";
 import { useNavigate } from "react-router-dom";
 import { useLoadingStore } from "../../Store/loadingStore";
+import { app } from "../../firebase";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+
 function LoginForm() {
   const navigate = useNavigate();
   const { user, setUser } = useUserStore();
@@ -50,6 +53,38 @@ function LoginForm() {
     }
   }
 
+  const handleGoogleClick = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth(app);
+
+      const result = await signInWithPopup(auth, provider);
+      console.log(result);
+
+      const res = await axios.post(
+        ` ${import.meta.env.VITE_ENDPOINT}user/withGoogle`,
+        {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        }
+      );
+      if (res) {
+        setUser(res.data);
+        setLoading(false);
+        setLoadingWall(true);
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
+      }
+      // toast.success(`Welcome Back ${res.data.firstName}`);
+
+      navigate("/home");
+    } catch (error) {
+      console.log("could not sign in with google", error);
+      // toast.error("Could not sign in with Google");
+    }
+  };
   return (
     <motion.div
       layout
@@ -78,9 +113,9 @@ function LoginForm() {
       </div>
       <div className={style.btnsContainer}>
         <HexButton onClick={signIn} isDisabled={loading} text={"Sign In"} />
-        {/* <button className={style.googleBtn}>
-    <span className={style.googleBtnText}></span>
-  </button> */}
+        <button onClick={handleGoogleClick} className={`${style.button}`}>
+          Continue with google
+        </button>
       </div>
     </motion.div>
   );

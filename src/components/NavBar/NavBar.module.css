@@ -53,7 +53,8 @@
   color: #fff;
   background-color: var(--primary-color);
 }
-.notificationsIcon {
+.notificationsIcon,
+.logoutIcon {
   font-size: 24px;
 }
 .addPostIcon {

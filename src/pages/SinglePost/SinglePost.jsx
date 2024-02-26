@@ -7,6 +7,7 @@ import { useUserStore } from "../../Store/userStore";
 import { LuHeart } from "react-icons/lu";
 import { RiChat3Line } from "react-icons/ri";
 import Comment from "../../components/Comment/Comment";
+import { AnimatePresence } from "framer-motion";
 
 function SinglePost() {
   const { postId } = useParams();
@@ -17,6 +18,7 @@ function SinglePost() {
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState();
   const [reaction, setReaction] = useState();
+  const [loading, setLoading] = useState(true);
   async function getPost() {
     try {
       const response = await axios.get(
@@ -29,7 +31,7 @@ function SinglePost() {
         setPost(response.data);
         setSpoiler(response.data.isSpoiler);
         setLikes(response.data.reactions.length);
-        setComments(response.data.comments);
+        getComments(response.data._id);
         setReaction(
           response.data?.reactions?.some((item) => {
             if (item.user === user._id) {
@@ -42,6 +44,7 @@ function SinglePost() {
       console.log(error);
     }
   }
+
   async function LikePost() {
     try {
       const response = await axios.patch(
@@ -51,6 +54,21 @@ function SinglePost() {
       if (response.status === 200) {
         setReaction(true);
         setLikes((prev) => prev + 1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function getComments(postId) {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_ENDPOINT}post/get-comments`,
+        { params: { postId: postId } }
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+        setComments(response.data);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -74,7 +92,7 @@ function SinglePost() {
     setNewComment("");
     const newCommentObj = { content: newComment, user: user, likes: [] };
 
-    setComments((prevComments) => [...prevComments, newCommentObj]);
+    setComments((prevComments) => [newCommentObj, ...prevComments]);
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_ENDPOINT}post/comment`,
@@ -82,7 +100,7 @@ function SinglePost() {
       );
       if (response) {
         console.log(response.data);
-        setComments(response.data.comments);
+        setComments([response.data, ...comments]);
       }
     } catch (error) {
       console.log(error);
@@ -98,7 +116,8 @@ function SinglePost() {
         }
       );
       if (response) {
-        setComments(Object.assign([], comments, { [idx]: response.data }));
+        console.log(response.data);
+        setComments(response.data);
       }
     } catch (error) {
       console.log(error);
@@ -108,7 +127,8 @@ function SinglePost() {
     getPost();
   }, []);
   return (
-    post && (
+    post &&
+    !loading && (
       <div className={style.postPreviewContainer}>
         <div className={style.postPreview}>
           <div className={style.postHeader}>
@@ -199,16 +219,17 @@ function SinglePost() {
             </div>
           </div>
           <div className={style.commentsContainer}>
-            {comments.map((comment, idx) => (
-              <Comment
-                key={idx}
-                comment={comment}
-                onLike={handleLikeComment}
-                idx={idx}
-                comments={comments}
-                setComments={setComments}
-              />
-            ))}
+              {comments.map((comment, idx) => (
+                <Comment
+                  layout={true}
+                  key={idx}
+                  comment={comment}
+                  onLike={handleLikeComment}
+                  idx={idx}
+                  comments={comments}
+                  setComments={setComments}
+                />
+              ))}
           </div>
         </div>
       </div>

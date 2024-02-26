@@ -13,6 +13,7 @@ import FYPage from "./pages/ForYou Page/FYPage";
 import Layout from "./layouts/Page Layout/Layout";
 import CreatePost from "./pages/Create Post/CreatePost";
 import SinglePost from "./pages/SinglePost/SinglePost";
+import ProfilePage from "./pages/Profile Page/ProfilePage";
 function AppRoutes() {
   const { user } = useUserStore();
   return (
@@ -35,12 +36,14 @@ function AppRoutes() {
         </Route>
         route
         <Route path="/" element={<Layout />}>
-          <Route path="fypage" element={<FYPage />} />
+          <Route path="home" element={<FYPage />} />
           <Route path="explore" element={<ExplorePage />} />
-          <Route path="comments/:postId" element={<SinglePost />}></Route>
+          <Route path="comments/:postId" element={<SinglePost />} />
+          <Route path="myProfile" element={<ProfilePage />} />
           {/* <Route path="chat" element={<FYPage />} />
           <Route path="fypage" element={<FYPage />} /> */}
         </Route>
+        <Route path="/profile/:username" element={<ProfilePage />} />
         <Route path="/post" element={<CreatePost />} />
       </Route>
 

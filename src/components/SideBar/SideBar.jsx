@@ -14,7 +14,7 @@ function SideBar() {
         <ul className={style.navItemsContainer}>
           <li className={style.navItemWrapper}>
             <NavLink
-              to={"/fypage"}
+              to={"/home"}
               className={({ isActive }) =>
                 isActive ? style.activeLink : style.navItem
               }
@@ -60,7 +60,7 @@ function SideBar() {
           </li>
           <li className={style.navItemWrapper}>
             <NavLink
-              to={"/"}
+              to={"/myProfile"}
               className={({ isActive }) =>
                 isActive ? style.activeLink : style.navItem
               }

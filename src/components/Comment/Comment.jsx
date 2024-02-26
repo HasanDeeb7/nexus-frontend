@@ -8,27 +8,32 @@ import axios from "axios";
 
 function Comment({ comment, onLike, idx, comments, setComments }) {
   const { user } = useUserStore();
-  const [isLiked, setIsLiked] = useState(comment.likes?.includes(user._id));
+  const [isLiked, setIsLiked] = useState(
+    comment.likes.length > 0 && comment.likes.includes(user._id)
+  );
   const [likesCount, setLikesCount] = useState(comment.likes?.length);
   async function deleteComment() {
     try {
       const response = await axios.delete(
         `${import.meta.env.VITE_ENDPOINT}post/delete-comment`,
-        { params: { commentId: comment._id, postId: comment.post._id } }
+        { params: { commentId: comment._id, postId: comment.post } }
       );
       if (response) {
         console.log(response.data);
         const newComments = comments.filter((item, index) => item != comment);
         setComments(newComments);
-        console.log(newComments);
+
+        // setComments(response.data);
+        // console.log(newComments);
       }
     } catch (error) {
       console.log(error);
     }
   }
   useEffect(() => {
-    console.log("effect");
-  }, []);
+    setIsLiked(comment.likes.length > 0 && comment.likes.includes(user._id));
+    setLikesCount(comment.likes?.length);
+  }, [comments]);
   return (
     <div className={style.comment}>
       <div className={style.commentUser}>

@@ -3,9 +3,12 @@ import { LuSearch } from "react-icons/lu";
 import { LuPlus } from "react-icons/lu";
 import { TbBellRinging2Filled } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import { LuLogOut } from "react-icons/lu";
+import { useUserStore } from "../../Store/userStore";
 
 function NavBar({ query, setQuery }) {
   const navigate = useNavigate();
+  const { logout } = useUserStore();
   return (
     <section className={style.navBarContainer}>
       <div className={style.navBarContentContainer}>
@@ -26,7 +29,9 @@ function NavBar({ query, setQuery }) {
           <li className={style.headerNavItem}>
             <TbBellRinging2Filled className={style.notificationsIcon} />
           </li>
-          {/* <li className={style.headerNavItems}></li> */}
+          <li className={style.headerNavItem}>
+            <LuLogOut className={style.logoutIcon} onClick={() => logout()} />
+          </li>
         </ul>
       </div>
     </section>
