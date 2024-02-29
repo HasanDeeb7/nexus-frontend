@@ -54,6 +54,10 @@
   padding: 15px 30px;
   color: #e5e5e5;
   transition: all 0.3s;
+  width: 50%;
+}
+.navButtons:nth-child(2) {
+  border-radius: 0 17px 0 0;
 }
 .navButtons:hover {
   background-color: rgb(115, 38, 126, 0.3);

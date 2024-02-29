@@ -8,7 +8,7 @@ import { LuHeart } from "react-icons/lu";
 import { RiChat3Line } from "react-icons/ri";
 import Comment from "../../components/Comment/Comment";
 import { AnimatePresence } from "framer-motion";
-
+import userBackground from "/public/images/pattern1.jpg";
 function SinglePost() {
   const { postId } = useParams();
   const { user } = useUserStore();
@@ -130,6 +130,34 @@ function SinglePost() {
     post &&
     !loading && (
       <div className={style.postPreviewContainer}>
+        <div className={style.userInfo}>
+          <div className={style.userDetails}>
+            <div className={style.detailContainer}>
+              <div className={style.detail}>
+                Has{" "}
+                <span className={style.number}>{post.user?.posts?.length}</span>{" "}
+                Posts
+              </div>
+            </div>
+            <div className={style.detailContainer}>
+              <div className={style.detail}>
+                Has{" "}
+                <span className={style.number}>
+                  {post.user?.friends?.length}{" "}
+                </span>{" "}
+                Teammates
+              </div>
+            </div>
+            <div className={style.detailContainer}>
+              <div className={style.detail}>
+                Interested in{" "}
+                <span className={style.number}>{post.user?.games?.length}</span>{" "}
+                Games
+              </div>
+            </div>
+          </div>
+          <img src={userBackground} className={style.userBackgroundImage} />
+        </div>
         <div className={style.postPreview}>
           <div className={style.postHeader}>
             <div className={style.userPosterInfo}>
@@ -219,17 +247,17 @@ function SinglePost() {
             </div>
           </div>
           <div className={style.commentsContainer}>
-              {comments.map((comment, idx) => (
-                <Comment
-                  layout={true}
-                  key={idx}
-                  comment={comment}
-                  onLike={handleLikeComment}
-                  idx={idx}
-                  comments={comments}
-                  setComments={setComments}
-                />
-              ))}
+            {comments.map((comment, idx) => (
+              <Comment
+                layout={true}
+                key={idx}
+                comment={comment}
+                onLike={handleLikeComment}
+                idx={idx}
+                comments={comments}
+                setComments={setComments}
+              />
+            ))}
           </div>
         </div>
       </div>

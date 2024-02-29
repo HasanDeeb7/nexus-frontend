@@ -12,7 +12,7 @@ export const useUserStore = create(
         );
         if (response) {
           console.log(response.data);
-          set(() => ({ user: null }));
+          set({ user: null });
         }
       } catch (error) {
         console.log(error);

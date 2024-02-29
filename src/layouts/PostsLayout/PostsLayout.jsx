@@ -6,11 +6,12 @@ import axios from "axios";
 import Post from "../../components/Post/Post";
 import { useUserStore } from "../../Store/userStore";
 
-function PostsLayout({ url, userId }) {
+function PostsLayout({ url, userId, miniPost }) {
   const [debounceTimer, setDebounceTimer] = useState(null);
   const { posts, setPosts } = usePostStore();
+  const { setLoadingWall } = useLoadingStore();
   const [loading, setLoading] = useState(true);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(30);
   const [hasMore, setHasMore] = useState(true);
   const { user } = useUserStore();
   async function getPosts() {
@@ -30,6 +31,9 @@ function PostsLayout({ url, userId }) {
         console.log(response.data);
         setPosts(response.data);
         setLoading(false);
+        setTimeout(() => {
+          setLoadingWall(false);
+        }, 1000);
         if (response.data.length < pageSize) {
           setHasMore(false);
         }
@@ -52,7 +56,11 @@ function PostsLayout({ url, userId }) {
       ) {
         if (!loading && hasMore) {
           console.log("handleScroll");
-          setPageSize((prevPageSize) => prevPageSize + 5);
+          if (miniPost) {
+            setPageSize((prevPageSize) => prevPageSize + 30);
+          } else {
+            setPageSize((prevPageSize) => prevPageSize + 5);
+          }
         }
       }
     }, 100);
@@ -75,9 +83,11 @@ function PostsLayout({ url, userId }) {
   return (
     !loading && (
       <div className={style.PostsLayoutContainer}>
-        <section className={style.postsSection}>
+        <section
+          className={!miniPost ? style.postsSection : style.miniPostsSection}
+        >
           {posts.reverse().map((post, idx) => (
-            <Post post={post} key={idx} />
+            <Post post={post} key={idx} miniPost={miniPost} />
           ))}
         </section>
       </div>

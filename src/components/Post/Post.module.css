@@ -17,6 +17,7 @@
   background: #0d0d0d;
   transition: all 0.3s;
   cursor: pointer;
+  box-shadow: 1px -1px 32px 6px rgba(0, 0, 0, 0.66);
 }
 .postPreview:hover {
   background: #80808026;
@@ -182,5 +183,24 @@
   background: #80808026;
 }
 
-@media (max-width: 426px) {
+.miniPost {
+  width: 150px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 12px;
+  height: 150px;
+  position: relative;
+}
+.miniPost:hover {
+  /* filter: brightness(0.7); */
+}
+.miniPreviewImage {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
 }

@@ -3,6 +3,8 @@
   font-family: Burbank;
   src: url("./assets/Burbank\ Big\ Condensed\ Font.otf") format("opentype");
 } */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -29,6 +31,7 @@ body {
   padding: 0;
   scroll-behavior: smooth;
   /* font-family: Burbank; */
+  font-family: "Quicksand", sans-serif;
 }
 *::selection {
   background-color: black;

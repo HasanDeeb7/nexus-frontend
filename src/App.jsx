@@ -23,6 +23,7 @@ function App() {
         );
         if (response) {
           setUser(response.data);
+          console.log("User", response.data);
           setLoading(false);
         } else {
           console.log("No data");

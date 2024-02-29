@@ -6,10 +6,13 @@ import axios from "axios";
 import { useUserStore } from "../../Store/userStore";
 import Avvvatars from "avvvatars-react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
-function Post({ post }) {
+function Post({ post, miniPost = false }) {
   const [spoiler, setSpoiler] = useState(post.isSpoiler);
-  const likeRef = useRef();
+  const elementsRef = useRef([]);
+  const pushRef = (el) => elementsRef.current.push(el);
+
   const { user } = useUserStore();
   const [likes, setLikes] = useState(post.reactions.length);
   const navigate = useNavigate();
@@ -51,17 +54,15 @@ function Post({ post }) {
       console.log(error);
     }
   }
-  //   function navigateTo(e) {
-  //     if (e.target.id === "Like") {
-  //       return;
-  //     }
-  //     navigate(`${url}/${post._id}`);
-  //   }
-  return (
-    <div
+
+  return !miniPost ? (
+    <motion.div
+      initial={{ y: 200, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      transition={{ ease: "easeOut", duration: 0.2 }}
       className={style.postPreviewContainer}
       onClick={(e) => {
-        if (likeRef.current.contains(e.target)) {
+        if (elementsRef.current.some((ref) => ref && ref.contains(e.target))) {
           return;
         } else {
           navigate(`/comments/${post._id}`);
@@ -70,7 +71,11 @@ function Post({ post }) {
     >
       <div className={style.postPreview}>
         <div className={style.postHeader}>
-          <div className={style.userPosterInfo}>
+          <div
+            className={style.userPosterInfo}
+            ref={pushRef}
+            onClick={() => navigate(`/profile/${post.user.username}`)}
+          >
             {post.user.avatar ? (
               <img
                 src={`${import.meta.env.VITE_ENDPOINT}${post.user.avatar}`}
@@ -103,7 +108,7 @@ function Post({ post }) {
           </figure>
 
           {spoiler && (
-            <div className={style.spoilerBluredLayer}>
+            <div className={style.spoilerBluredLayer} ref={pushRef}>
               <button type="button" onClick={() => setSpoiler(false)}>
                 View Spoiler
               </button>
@@ -112,7 +117,7 @@ function Post({ post }) {
         </div>
         <div className={style.postActionController}>
           <div
-            ref={likeRef}
+            ref={pushRef}
             id="Like"
             className={style.reactionContainer}
             onClick={
@@ -137,6 +142,24 @@ function Post({ post }) {
           </div>
         </div>
       </div>
+    </motion.div>
+  ) : (
+    <div
+      className={`${style.previewImageContainer} ${style.miniPost}`}
+      onClick={() => navigate(`/comments/${post._id}`)}
+    >
+      <img
+        src={`${import.meta.env.VITE_ENDPOINT}${post.image}`}
+        alt=""
+        className={style.miniPreviewImage}
+      />
+      {spoiler && (
+        <div className={style.spoilerBluredLayer} ref={pushRef}>
+          <button type="button" onClick={() => setSpoiler(false)}>
+            Spoiler
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,6 +4,11 @@ import { Outlet } from "react-router-dom";
 import style from "./Layout.module.css";
 import NavBar from "../../components/NavBar/NavBar";
 import { useLoadingStore } from "../../Store/loadingStore";
+import video from "/public/videos/bgVideo.mp4";
+import pattern from "/public/images/pattern1.jpg";
+import pattern2 from "/public/images/pattern2.jpg";
+import pattern3 from "/public/images/pattern3.jpg";
+
 function Layout() {
   const { setLoadingWall } = useLoadingStore();
   useEffect(() => {
@@ -14,9 +19,17 @@ function Layout() {
   const [query, setQuery] = useState({ search: "" });
   return (
     <div className={style.layout}>
-      <NavBar query={query} setQuery={setQuery} />
+      {/* <div className={style.pageBackground}>
+        <video autoPlay muted loop id="video">
+          <source src={video} />
+        </video>
+      </div> */}
+      
+      <div className={style.pageBackground}>
+        <img src={pattern3} alt="" />
+      </div>
+      <NavBar />
       <section className={style.pageWrapper}>
-        <SideBar />
         <div className={style.pageContent}>
           <Outlet />
         </div>
@@ -29,7 +42,9 @@ function Layout() {
             right: 0,
             top: 0,
           }}
-        >dfaksdfj</div>
+        >
+          dfaksdfj
+        </div>
       </section>
     </div>
   );
