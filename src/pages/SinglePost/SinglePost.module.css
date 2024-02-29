@@ -10,6 +10,41 @@
   width: 400px;
   height: 100vh;
 }
+.userDetails > span {
+  font-size: 20px;
+}
+.userActivitiesContainer {
+  display: flex;
+  gap: 30px;
+}
+
+.PSIcon {
+  color: #006fcd;
+}
+.PCIcon {
+  color: #e95722;
+}
+.XboxIcon {
+  color: #027900;
+}
+
+.platformsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.platform {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.platformIcon {
+  font-size: 15px;
+}
+
 .userDetails {
   display: flex;
   flex-direction: column;
@@ -47,8 +82,11 @@
   transition: all 0.3s;
   max-width: 578px;
 }
-.postPreview:hover {
-  /* border: 2px solid #949393; */
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
 }
 
 .userPosterInfo {

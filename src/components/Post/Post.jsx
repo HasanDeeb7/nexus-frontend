@@ -56,10 +56,10 @@ function Post({ post, miniPost = false }) {
   }
 
   return !miniPost ? (
-    <motion.div
-      initial={{ y: 200, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      transition={{ ease: "easeOut", duration: 0.2 }}
+    <div
+      // initial={{ y: 200, opacity: 0 }}
+      // whileInView={{ y: 0, opacity: 1 }}
+      // transition={{ ease: "easeOut", duration: 0.2 }}
       className={style.postPreviewContainer}
       onClick={(e) => {
         if (elementsRef.current.some((ref) => ref && ref.contains(e.target))) {
@@ -142,7 +142,7 @@ function Post({ post, miniPost = false }) {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   ) : (
     <div
       className={`${style.previewImageContainer} ${style.miniPost}`}

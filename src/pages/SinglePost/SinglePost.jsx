@@ -8,6 +8,12 @@ import { LuHeart } from "react-icons/lu";
 import { RiChat3Line } from "react-icons/ri";
 import Comment from "../../components/Comment/Comment";
 import { AnimatePresence } from "framer-motion";
+import { BsFilePostFill } from "react-icons/bs";
+import { RiTeamFill } from "react-icons/ri";
+import { IoGameController } from "react-icons/io5";
+import { FaPlaystation } from "react-icons/fa6";
+import { LiaXbox } from "react-icons/lia";
+import { LuPcCase } from "react-icons/lu";
 import userBackground from "/public/images/pattern1.jpg";
 function SinglePost() {
   const { postId } = useParams();
@@ -19,6 +25,13 @@ function SinglePost() {
   const [likes, setLikes] = useState();
   const [reaction, setReaction] = useState();
   const [loading, setLoading] = useState(true);
+
+  const platformIcons = {
+    PS: <FaPlaystation className={`${style.platformIcon} ${style.PSIcon}`} />,
+    Xbox: <LiaXbox className={`${style.platformIcon} ${style.XboxIcon}`} />,
+    PC: <LuPcCase className={`${style.platformIcon} ${style.PCIcon}`} />,
+  };
+
   async function getPost() {
     try {
       const response = await axios.get(
@@ -132,28 +145,40 @@ function SinglePost() {
       <div className={style.postPreviewContainer}>
         <div className={style.userInfo}>
           <div className={style.userDetails}>
-            <div className={style.detailContainer}>
-              <div className={style.detail}>
-                Has{" "}
-                <span className={style.number}>{post.user?.posts?.length}</span>{" "}
-                Posts
+            <span>{post.user.username}</span>
+            <div className={style.userActivitiesContainer}>
+              <div className={style.detailContainer}>
+                <div className={style.detail}>
+                  <span className={style.number}>
+                    {post.user?.posts?.length}
+                  </span>{" "}
+                  <BsFilePostFill className={style.activityIcon} />
+                </div>
+              </div>
+              <div className={style.detailContainer}>
+                <div className={style.detail}>
+                  <span className={style.number}>
+                    {post.user?.friends?.length}{" "}
+                  </span>
+                  <RiTeamFill className={style.activityIcon} />
+                </div>
+              </div>
+              <div className={style.detailContainer}>
+                <div className={style.detail}>
+                  <span className={style.number}>
+                    {post.user?.games?.length}
+                  </span>{" "}
+                  <IoGameController className={style.activityIcon} />
+                </div>
               </div>
             </div>
-            <div className={style.detailContainer}>
-              <div className={style.detail}>
-                Has{" "}
-                <span className={style.number}>
-                  {post.user?.friends?.length}{" "}
-                </span>{" "}
-                Teammates
-              </div>
-            </div>
-            <div className={style.detailContainer}>
-              <div className={style.detail}>
-                Interested in{" "}
-                <span className={style.number}>{post.user?.games?.length}</span>{" "}
-                Games
-              </div>
+            <div className={style.platformsContainer}>
+              {post.user.platforms.map((platform) => (
+                <div className={style.platform}>
+                  {platformIcons[platform.name]}
+                  <span> {platform.username}</span>
+                </div>
+              ))}
             </div>
           </div>
           <img src={userBackground} className={style.userBackgroundImage} />
