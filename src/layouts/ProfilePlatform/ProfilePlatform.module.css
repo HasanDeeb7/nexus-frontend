@@ -1,0 +1,90 @@
+.platformsContainer {
+  display: flex;
+  gap: 20px;
+  margin-inline: 20px;
+}
+.platformController {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+.platform {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.PSPlatform {
+  background: #006fcd;
+}
+.XboxPlatform {
+  background-color: #027900;
+}
+.PCPlatform {
+  background-color: #e95722;
+}
+.profileUsername {
+  width: 100%;
+  height: 20px;
+  outline: none;
+  border: none;
+  padding: 20px 10px;
+  font-size: 20px;
+  position: absolute;
+  transform: translateY(-40px);
+  transition: all 0.3s;
+  z-index: -1;
+}
+.PSProfileUsername {
+  background: #006fcd;
+  filter: brightness(0.7);
+}
+.PCProfileUsername {
+  background: #e95722;
+  filter: brightness(0.7);
+}
+.XboxProfileUsername {
+  background: #027900;
+  filter: brightness(0.7);
+}
+.platformOpener {
+  cursor: pointer;
+  width: 100%;
+  position: absolute;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  padding: 3px 0;
+}
+.arrowIcon {
+  font-size: 14px;
+  transition: all 0.3s;
+}
+.reversedArrow {
+  transform: rotate(180deg);
+}
+.openInput {
+  transform: translateY(0);
+}
+.addPlatformBtn {
+  background-color: black;
+  border: none;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  transform: translateY(-40px);
+  z-index: -1;
+  transition: all 0.3s;
+}
+.openedBtn {
+  transform: translateY(0);
+}
+.addIcon {
+  font-size: 16px;
+}

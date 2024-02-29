@@ -23,6 +23,7 @@ function App() {
         );
         if (response) {
           setUser(response.data);
+          console.log("User", response.data);
           setLoading(false);
         } else {
           console.log("No data");
@@ -41,7 +42,7 @@ function App() {
     <>
       <AnimatePresence>
         {loadingWall && <LoadingWall key={"Loading-Wall"} />}
-        {!loading && (
+        {!loading ? (
           <>
             <LoadingBar
               color="#c641b5"
@@ -50,6 +51,8 @@ function App() {
             />
             <AppRoutes />
           </>
+        ) : (
+          <LoadingWall key={"Loading-Wallv2"} />
         )}
       </AnimatePresence>
     </>

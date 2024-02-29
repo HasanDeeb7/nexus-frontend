@@ -1,0 +1,99 @@
+.gamesPageContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px;
+  margin-bottom: 200px;
+}
+.pageHeader {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+.searchBarContainer {
+  align-self: flex-end;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.pageContentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.gamesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.selectedGamesContainer {
+  display: flex;
+  gap: 10px;
+}
+.gamePageFooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 30px;
+  background-color: #141410;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 90000;
+}
+.selectedGamesContainer {
+  display: flex;
+  width: calc(100% - 330px);
+  overflow-y: hidden;
+}
+.footerContent {
+  position: relative;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.footerActions {
+  margin-left: auto;
+  position: absolute;
+  right: 0;
+  top: -5px;
+  margin-left: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #141410;
+}
+.footerBtnsContainer {
+  display: flex;
+  gap: 20px;
+}
+.primaryBtn,
+.secondaryBtn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: all 0.3s;
+}
+.primaryBtn {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+.secondaryBtn {
+  background-color: #fff;
+  color: var(--primary-color);
+}
+.primaryBtn:hover,
+.secondaryBtn:hover {
+  filter: brightness(0.7);
+}

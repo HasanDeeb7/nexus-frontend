@@ -1,0 +1,252 @@
+.postPreviewContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 100px;
+  flex-direction: row-reverse;
+}
+.userInfo {
+  position: relative;
+  width: 400px;
+  height: 100vh;
+}
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  border: 1px solid #e1e1e1;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  gap: 10px;
+}
+.userBackgroundImage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  filter: grayscale(100%) brightness(70%) sepia(55%) hue-rotate(-100deg)
+    saturate(500%) contrast(1) blur(3px);
+  object-fit: cover;
+}
+.postPreview {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 2px solid transparent;
+  padding: 15px;
+  border-radius: 15px;
+  background: #0d0d0d;
+  transition: all 0.3s;
+  max-width: 578px;
+}
+.postPreview:hover {
+  /* border: 2px solid #949393; */
+}
+
+.userPosterInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.userPosterInfo > div,
+.userPosterInfo > p {
+  cursor: pointer;
+}
+
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+.postInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+}
+.spoilerBluredLayer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  backdrop-filter: blur(70px);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.spoilerBluredLayer > button {
+  padding: 10px 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+.spoilerBluredLayer > button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.postGameTypeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.previewCaption {
+  background-color: transparent;
+  font-size: 16px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  align-self: flex-start;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+.postHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+.postInfoHeader {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+.postGame,
+.postPreviewType {
+  font-weight: 600;
+  position: relative;
+}
+.postGame::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-color);
+  border-radius: 50px;
+  top: 4.5px;
+  right: -15px;
+}
+.previewImageContainer {
+  background-color: black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.imagePlaceholder {
+  width: 370px;
+  height: auto;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.previewImage {
+  width: 370px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+  max-height: 307px;
+  border-radius: 20px;
+}
+.postActionController {
+  display: flex;
+  width: fit-content;
+
+  gap: 5px;
+  border-radius: 10px;
+}
+.reactionContainer {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 10px 20px;
+  gap: 6px;
+  cursor: pointer;
+}
+.reactionContainer:hover {
+  background: #80808026;
+}
+.reactionContainer:hover > .likeIcon {
+  color: red;
+}
+.likeIcon,
+.commentBtnIcon {
+  font-size: 18px;
+  cursor: pointer;
+  height: 100%;
+  transition: all 0.3s;
+}
+
+.selectedReaction {
+  color: red;
+  fill: red;
+  height: 100%;
+}
+.postCommentButtonContainer {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: 50px;
+  transition: all 0.3s;
+}
+.postCommentButtonContainer:hover {
+  cursor: pointer;
+  filter: contrast(0.8);
+  background: #80808026;
+}
+.commentsIndicator {
+  display: flex;
+  gap: 6px;
+}
+.addCommentContainer {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid grey;
+}
+.commentInput {
+  background-color: #0d0d0d;
+  width: 100%;
+  height: 120px;
+  padding: 10px;
+  font-size: 16px;
+  resize: none;
+  border: none;
+  outline: none;
+}
+.commentSubmit {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  background: #1e1e1e;
+}
+.commentBtn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: all 0.3s;
+  background-color: var(--primary-color);
+}
+.commentBtn:hover {
+  filter: brightness(0.7);
+}

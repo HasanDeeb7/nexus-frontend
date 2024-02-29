@@ -1,0 +1,183 @@
+.profilePage {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+.heroSection {
+  width: 100%;
+  position: relative;
+  background-image: url("public/images/God\ of\ War\ 4K\ HD\ desktop\ background\ wallpaper.jpg");
+  height: 300px;
+}
+.blurredLayer {
+  width: 100%;
+  height: 300px;
+  backdrop-filter: blur(1px) brightness(0.5);
+}
+.imageWrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+}
+.userInfoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: brightness(0.5) blur(10px);
+  border: 1px solid transparent;
+}
+.userHeroSection {
+  position: absolute;
+  bottom: 75px;
+  left: 30px;
+}
+.userAvatar {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--primary-color);
+}
+.userNameAndPlatforms {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.userName {
+  font-size: 24px;
+}
+.platformIconsContainer {
+  display: flex;
+  gap: 6px;
+}
+.platformIcon {
+  font-size: 14px;
+}
+.PSIcon {
+  color: #006fcd;
+}
+.PCIcon {
+  color: #e95722;
+}
+.XboxIcon {
+  color: #027900;
+}
+.singleIconContainer {
+  position: relative;
+}
+.platformDialog {
+  display: flex;
+  border-radius: 5px;
+  width: fit-content;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 15px);
+  transition: all 0.2s;
+  opacity: 0;
+  user-select: none;
+}
+.dialogUsername {
+  padding: 5px 10px;
+}
+.PCDialog {
+  background-color: #e95722;
+  /* display: none; */
+}
+.PSDialog {
+  background-color: #006fcd;
+  /* display: none; */
+}
+.XboxDialog {
+  background-color: #027900;
+}
+.PCIcon:hover + .PCDialog {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+.PSIcon:hover + .PSDialog {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+.XboxIcon:hover + .XboxDialog {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+.dialogIcon {
+  background-color: black;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 5px 0 0 5px;
+}
+.dialogIcon > .platformIcon {
+  color: white;
+}
+/* -------------------------------------- */
+
+.userActivityWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: brightness(0.5) blur(10px);
+  border: 1px solid transparent;
+}
+.userActivityContainer {
+  position: absolute;
+  bottom: 75px;
+  right: 30px;
+  /* height: 160px; */
+}
+.singleDetail {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 18px;
+  align-items: center;
+}
+.singleDetail > span:nth-child(1) {
+  font-weight: 700;
+}
+.sectionTabs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sectionTabs > ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  background-color: #121212;
+  margin-bottom: 20px;
+}
+.tab {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 20px 40px;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+}
+/* .tab:hover {
+  background-color: var(--secondary-color);
+}
+.selectedTab {
+  background-color: var(--primary-color);
+} */
+.bgColor {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: var(--primary-color);
+}

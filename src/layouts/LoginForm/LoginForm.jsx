@@ -5,9 +5,15 @@ import axios from "axios";
 import { useUserStore } from "../../Store/userStore";
 import { easeIn, easeOut, motion } from "framer-motion";
 import HexButton from "../../components/HexButton/HexButton";
+import { useNavigate } from "react-router-dom";
+import { useLoadingStore } from "../../Store/loadingStore";
+import { app } from "../../firebase";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 function LoginForm() {
+  const navigate = useNavigate();
   const { user, setUser } = useUserStore();
+  const { setLoadingWall } = useLoadingStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ username: false, password: false });
   const [credentials, setCredentials] = useState({
@@ -16,30 +22,69 @@ function LoginForm() {
   });
   async function signIn() {
     if (
-      Object.entries(newUser).some((item) => {
+      Object.entries(credentials).some((item) => {
         if (item[1] === "" || !item[1]) {
           setError({ ...error, [item[0]]: true });
           console.log(error);
           return true; // Returning true if the condition is met
         }
-        // return false; // Returning false if the condition is not met
       })
-    )
-      setLoading(true);
+    ) {
+      return;
+    }
+    setLoading(true);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_ENDPOINT}user/login`,
         credentials
       );
       if (response) {
+        console.log(response.data);
         setUser(response.data);
         setLoading(false);
+        setLoadingWall(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       }
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   }
+
+  const handleGoogleClick = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth(app);
+
+      const result = await signInWithPopup(auth, provider);
+      console.log(result);
+
+      const res = await axios.post(
+        ` ${import.meta.env.VITE_ENDPOINT}user/withGoogle`,
+        {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        }
+      );
+      if (res) {
+        setUser(res.data);
+        setLoading(false);
+        setLoadingWall(true);
+        setTimeout(() => {
+          navigate("/home");
+        }, 1000);
+      }
+      // toast.success(`Welcome Back ${res.data.firstName}`);
+
+      navigate("/home");
+    } catch (error) {
+      console.log("could not sign in with google", error);
+      // toast.error("Could not sign in with Google");
+    }
+  };
   return (
     <motion.div
       layout
@@ -68,9 +113,9 @@ function LoginForm() {
       </div>
       <div className={style.btnsContainer}>
         <HexButton onClick={signIn} isDisabled={loading} text={"Sign In"} />
-        {/* <button className={style.googleBtn}>
-    <span className={style.googleBtnText}></span>
-  </button> */}
+        <button onClick={handleGoogleClick} className={`${style.button}`}>
+          Continue with google
+        </button>
       </div>
     </motion.div>
   );

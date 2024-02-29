@@ -1,0 +1,31 @@
+.fyPageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 20px 80px 20px;
+}
+.postsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  min-width: 200px;
+}
+.pagePortrait {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 400px;
+}
+.pagePortrait > img {
+  width: 100%;
+}
+
+@media (max-width: 426px) {
+  .fyPageContainer {
+    align-items: center;
+  }
+  .postsSection {
+    width: 100%;
+  }
+}

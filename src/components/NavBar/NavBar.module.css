@@ -1,0 +1,219 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
+.navBarContainer {
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #eaeaea2b;
+  padding: 5px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  position: fixed;
+  top: 0;
+  background: #1e1e1e;
+  z-index: 100;
+}
+.navBarContentContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+.searchContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 40%;
+  min-width: 200px;
+}
+
+.headerNavItems {
+  list-style: none;
+}
+.searchInput {
+  color: white;
+  padding: 15px 10px;
+  width: 100%;
+  border-radius: 7px;
+  background-color: #0d0f13;
+  outline: none;
+  border: 1px solid transparent;
+  transition: border-color 0.25s ease, outline 0.15s ease;
+}
+.searchIcon {
+  position: absolute;
+  right: 15px;
+}
+.headerNavItem {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+.headerNavItem:hover {
+  color: #fff;
+  background-color: var(--primary-color);
+}
+.notificationsIcon,
+.logoutIcon {
+  font-size: 24px;
+}
+.addPostIcon {
+  font-size: 24px;
+}
+.navItemsContainer {
+  /* width: 100%; */
+  display: flex;
+  align-items: center;
+  top: 0;
+  gap: 10px;
+}
+.navItemWrapper {
+  list-style: none;
+}
+.navItem {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.3s;
+  border-radius: 5px;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  width: 100%;
+}
+.navItem:hover {
+  background-color: #595959;
+}
+.navItem > a {
+  transition: all 0.3s;
+}
+.activeLink {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: all 0.3s;
+  border-radius: 5px;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  background-color: var(--primary-color);
+  font-size: 16px;
+  font-weight: 300;
+}
+.navIcon {
+  font-size: 20px;
+}
+.userImage {
+  width: 34px;
+  height: 34px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+.actionLabel {
+  font-family: "Orbitron", sans-serif;
+  min-width: 70px;
+}
+.profileHeadNav {
+  list-style: none;
+}
+
+.linkLabel {
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
+}
+@media (max-width: 426px) {
+  .sideBarContainer {
+    position: fixed;
+    margin-top: 15px;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 90%;
+    z-index: 9000;
+    height: auto;
+    border-radius: 10px;
+    left: 50%;
+    transform: translate(-50%, -14%);
+    backdrop-filter: blur(21px);
+  }
+  .navItemsContainer {
+    width: 100%;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .linkLabel {
+    display: none;
+  }
+  .navIcon {
+    width: 27px;
+    height: 27px;
+  }
+  .navItem {
+    padding: 5px;
+  }
+  .activeLink {
+    padding: 5px;
+  }
+  .userImage {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+.burgerMenu {
+  display: none;
+  font-size: 24px;
+  margin-left: auto;
+}
+
+@media (max-width: 700px) {
+  .navItemsContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .navBarContentContainer {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 105px;
+    height: 100vh;
+    background: #121212;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    transition: all 0.3s;
+    transform: translateX(110px);
+    padding: 20px 0;
+  }
+  .burgerMenu {
+    display: block;
+    transition: all 0.3s;
+  }
+  .navBarOpen {
+    transform: translateX(0);
+  }
+  .burgerOpen {
+    transform: translateX(-110px);
+  }
+}
+
+@media (max-width: 426px) {
+  .actionLabel {
+    display: none;
+  }
+  .addPostIcon {
+    display: none;
+  }
+  .searchContainer {
+    min-width: 100px;
+  }
+}

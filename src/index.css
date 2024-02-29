@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@font-face {
+  font-family: Burbank;
+  src: url("./assets/Burbank\ Big\ Condensed\ Font.otf") format("opentype");
+} */
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -11,7 +16,7 @@
   text-rendering: optimizeLegibility;
   --primary-color: #73267e;
   --secondary-color: #84568a;
-  --border-radius: 10px;
+  --border-radius: 5px;
   --main-bg-color: #22221b;
   --main-border-color: #eaeaea;
 }
@@ -22,4 +27,32 @@ body {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  /* font-family: Burbank; */
+  font-family: "Quicksand", sans-serif;
+}
+*::selection {
+  background-color: black;
+  color: var(--primary-color);
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  z-index: -999;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee14e;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }
