@@ -13,7 +13,7 @@ import CustomToast from "./components/CustomToast/CustomToast";
 import { useNavigate } from "react-router-dom";
 import { useNotificationStore } from "./Store/notification";
 
-export const socket = io("http://localhost:3001");
+export const socket = io(import.meta.env.VITE_SOCKET);
 
 axios.defaults.withCredentials = true;
 
