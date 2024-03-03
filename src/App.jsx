@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { useUserStore } from "./Store/userStore";
 import axios from "axios";
@@ -7,10 +7,20 @@ import { useLoadingStore } from "./Store/loadingStore";
 import LoadingBar from "react-top-loading-bar";
 import LoadingWall from "./components/LoadingWall/LoadingWall";
 import { AnimatePresence } from "framer-motion";
+import { io } from "socket.io-client";
+import { toast } from "react-toastify";
+import CustomToast from "./components/CustomToast/CustomToast";
+import { useNavigate } from "react-router-dom";
+import { useNotificationStore } from "./Store/notification";
+
+export const socket = io("http://localhost:3001");
 
 axios.defaults.withCredentials = true;
+
 function App() {
+  const navigate = useNavigate();
   const { user, setUser } = useUserStore();
+  const { setNotifications } = useNotificationStore();
   const { proggressBar, setProgress, loadingWall, loading, setLoading } =
     useLoadingStore();
 
@@ -23,7 +33,8 @@ function App() {
         );
         if (response) {
           setUser(response.data);
-          console.log("User", response.data);
+          console.log(response.data.notifications);
+          setNotifications(response.data.notifications);
           setLoading(false);
         } else {
           console.log("No data");
@@ -35,9 +46,33 @@ function App() {
       setLoading(false);
     }
   }
+
   useEffect(() => {
     getUser();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      socket.on("connect", () => {
+        console.log(socket.connected);
+      });
+      socket.emit("join-room", user.username);
+
+      socket.on("friend-add-receive", (data) => {
+        toast(
+          <CustomToast
+            onClick={() => navigate(`/profile/${data.sender}`)}
+            message={data.message}
+          />,
+          {
+            position: "top-right",
+          }
+        );
+        setNotifications((prevNotifications) => [...prevNotifications, data]);
+      });
+    }
+  }, [socket, user]);
+
   return (
     <>
       <AnimatePresence>

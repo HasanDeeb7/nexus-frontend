@@ -34,6 +34,7 @@ function ProfilePlatform() {
 
   return (
     <div className={style.profilePlatform}>
+      <h2>Add Platform</h2>
       <div className={style.platformsContainer}>
         <div className={style.platformController}>
           <div className={`${style.platform} ${style.PSPlatform}`}>
@@ -52,6 +53,7 @@ function ProfilePlatform() {
             </div>
           </div>
           <input
+            placeholder="Username..."
             name="PS"
             value={platforms["PS"]}
             onChange={handleChange}
@@ -85,6 +87,7 @@ function ProfilePlatform() {
             </div>
           </div>
           <input
+            placeholder="Username..."
             name="PC"
             value={platforms["PC"]}
             onChange={handleChange}
@@ -120,6 +123,7 @@ function ProfilePlatform() {
             </div>
           </div>
           <input
+            placeholder="Username..."
             name="Xbox"
             value={platforms[`Xbox`]}
             onChange={handleChange}

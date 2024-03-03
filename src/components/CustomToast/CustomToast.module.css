@@ -1,0 +1,13 @@
+.customToastContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.customToast {
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.customToast:hover {
+  color: var(--primary-color);
+}

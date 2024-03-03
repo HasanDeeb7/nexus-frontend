@@ -47,9 +47,9 @@ function AppRoutes() {
           <Route path="comments/:postId" element={<SinglePost />} />
           <Route path="myProfile" element={<ProfilePage />} />
           <Route path="profile/:username" element={<ProfilePage />} />
+          <Route path="/post" element={<CreatePost />} />
         </Route>
         <Route path="/search" element={<SearchResult />} />
-        <Route path="/post" element={<CreatePost />} />
       </Route>
 
       <Route

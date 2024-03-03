@@ -7,8 +7,10 @@ import axios from "axios";
 import { useUserStore } from "../../Store/userStore";
 import { useNavigate } from "react-router-dom";
 import { useLoadingStore } from "../../Store/loadingStore";
+import { useNotificationStore } from "../../Store/notification";
 function SignupForm() {
   const navigate = useNavigate();
+  const { setNotifications } = useNotificationStore();
   const { setUser } = useUserStore();
   const { proggressBar, setProgress } = useLoadingStore();
   const [newUser, setNewUser] = useState({
@@ -82,6 +84,9 @@ function SignupForm() {
         setProgress(80);
         console.log(response.data);
         setUser(response.data);
+        setNotifications(
+          response.data.notifications?.filter((item) => item.isRead)
+        );
         setLoading(false);
         navigate("/verify");
         setTimeout(() => {
@@ -165,6 +170,7 @@ function SignupForm() {
           control={"password"}
           removeError={removeError}
           required
+          type="password"
           isError={
             error["password"] || error["password-mismatch"] ? true : false
           }
@@ -180,6 +186,7 @@ function SignupForm() {
           setValue={setNewUser}
           label={"Confirm Password"}
           control={"confirmPassword"}
+          type="password"
           required
           isError={error["password-mismatch"] ? true : false}
           removeError={removeError}

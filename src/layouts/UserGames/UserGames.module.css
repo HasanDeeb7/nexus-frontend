@@ -1,0 +1,27 @@
+.userGamesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.userGamesContainer {
+  display: flex;
+  gap: 20px;
+  overflow: auto;
+}
+.userGamesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.editGamesBtn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: all 0.3s;
+  background-color: var(--primary-color);
+  transition: all 0.3s;
+}
+.editGamesBtn:hover {
+  filter: brightness(0.7);
+}

@@ -8,6 +8,9 @@ import PostsLayout from "../../layouts/PostsLayout/PostsLayout";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ProfilePlatform from "../../layouts/ProfilePlatform/ProfilePlatform";
+import { socket } from "../../App";
+import UserGames from "../../layouts/UserGames/UserGames";
+import Friends from "../../layouts/Friends/Friends";
 function ProfilePage() {
   const { user, setUser } = useUserStore();
   const [loading, setLoading] = useState(true);
@@ -19,16 +22,13 @@ function ProfilePage() {
     setSection(tab);
   }
   async function getUser() {
-    console.log("here");
     if (username) {
-      console.log("down here");
       try {
         const res = await axios.get(
           `${import.meta.env.VITE_ENDPOINT}user/by-username`,
           { params: { username: username } }
         );
         if (res) {
-          console.log(res.data);
           setUserProfile(res.data);
           setLoading(false);
         }
@@ -50,10 +50,11 @@ function ProfilePage() {
           { username: username }
         );
         if (res) {
-          console.log(res.data);
           setUserProfile(res.data.targetUser);
           setUser({ ...user, friends: res.data?.user?.friends });
-          // setLoading(false);
+          if (res.data.action === "add") {
+            socket.emit("friend-add", { user: user, targetUser: username });
+          }
         }
       } catch (error) {
         console.log(error);
@@ -90,16 +91,32 @@ function ProfilePage() {
                 />
               ) : null}
             </li>
+            <li
+              key={"FriendsTab"}
+              className={`${style.tab} ${
+                section === "friends" && style.selectedTab
+              }`}
+              onClick={() => handleSwitchTab("friends")}
+            >
+              Teammates
+              {section === "friends" ? (
+                <motion.div
+                  transition={{ duration: 0.2 }}
+                  className={style.bgColor}
+                  layoutId="bgColor"
+                />
+              ) : null}
+            </li>
             {user._id === userProfile._id && (
               <li
-                key={"platformTab"}
+                key={"SettingsTab"}
                 className={`${style.tab} ${
-                  section === "platform" && style.selectedTab
+                  section === "settings" && style.selectedTab
                 }`}
-                onClick={() => handleSwitchTab("platform")}
+                onClick={() => handleSwitchTab("settings")}
               >
-                Add Platform
-                {section === "platform" ? (
+                Settings
+                {section === "settings" ? (
                   <motion.div
                     transition={{ duration: 0.2 }}
                     className={style.bgColor}
@@ -116,8 +133,21 @@ function ProfilePage() {
             miniPost={true}
             userId={userProfile._id}
           />
+        ) : section === "settings" ? (
+          <div className={style.settingsSection}>
+            <h1>Settings</h1>
+            <ProfilePlatform />
+            <UserGames />
+          </div>
         ) : (
-          <ProfilePlatform />
+          <Friends
+            user={userProfile}
+            title={
+              user.username === userProfile.username
+                ? "My Teammates"
+                : `${userProfile.username}'s Teammates`
+            }
+          />
         )}
       </div>
     )

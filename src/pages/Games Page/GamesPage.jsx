@@ -6,6 +6,7 @@ import Input from "../../components/Input/Input";
 import GameCard from "../../components/Game Card/GameCard";
 import { useLoadingStore } from "../../Store/loadingStore";
 import { useUserStore } from "../../Store/userStore";
+import { useNavigate } from "react-router-dom";
 
 function GamesPage() {
   const { error, setError } = useErrorStore();
@@ -14,7 +15,8 @@ function GamesPage() {
   const { loadingWall, setLoadingWall } = useLoadingStore();
   const [loading, setLoading] = useState(true);
   const [debounceTimer, setDebounceTimer] = useState(null);
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
+  const navigate = useNavigate();
   const [selectedGames, setSelectedGames] = useState(user.games);
 
   async function getGames() {
@@ -40,11 +42,23 @@ function GamesPage() {
       );
       if (response) {
         console.log("Your games have been updated.");
+        setLoadingWall(true);
+        setTimeout(() => {
+          navigate("/home", { replace: true });
+        }, 1000);
+        setUser({ ...user, games: selectedGames });
       }
     } catch (error) {
       console.log(error);
     }
   }
+  function handleSkip() {
+    setLoadingWall(true);
+    setTimeout(() => {
+      navigate("/home");
+    }, 1000);
+  }
+
   async function handleSearch(query) {
     try {
       const response = await axios.get(
@@ -83,7 +97,7 @@ function GamesPage() {
   }
 
   useEffect(() => {
-    setLoadingWall(true);
+    setLoadingWall(false);
     getGames();
   }, []);
 
@@ -149,7 +163,11 @@ function GamesPage() {
                 >
                   Apply
                 </button>
-                <button type="button" className={style.secondaryBtn}>
+                <button
+                  type="button"
+                  className={style.secondaryBtn}
+                  onClick={handleSkip}
+                >
                   Skip
                 </button>
               </div>

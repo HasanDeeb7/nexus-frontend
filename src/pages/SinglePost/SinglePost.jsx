@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import style from "./SinglePost.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -25,6 +25,7 @@ function SinglePost() {
   const [likes, setLikes] = useState();
   const [reaction, setReaction] = useState();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const platformIcons = {
     PS: <FaPlaystation className={`${style.platformIcon} ${style.PSIcon}`} />,
@@ -59,6 +60,8 @@ function SinglePost() {
   }
 
   async function LikePost() {
+    setLikes((prev) => prev + 1);
+    setReaction(true);
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_ENDPOINT}post/react`,
@@ -66,10 +69,11 @@ function SinglePost() {
       );
       if (response.status === 200) {
         setReaction(true);
-        setLikes((prev) => prev + 1);
       }
     } catch (error) {
       console.log(error);
+      setLikes((prev) => prev - 1);
+      setReaction(false);
     }
   }
   async function getComments(postId) {
@@ -88,6 +92,8 @@ function SinglePost() {
     }
   }
   async function unlikePost() {
+    setReaction(false);
+    setLikes((prev) => prev - 1);
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_ENDPOINT}post/remove-reaction`,
@@ -95,9 +101,10 @@ function SinglePost() {
       );
       if (response) {
         setReaction(false);
-        setLikes((prev) => prev - 1);
       }
     } catch (error) {
+      setReaction(true);
+      setLikes((prev) => prev + 1);
       console.log(error);
     }
   }
@@ -185,7 +192,10 @@ function SinglePost() {
         </div>
         <div className={style.postPreview}>
           <div className={style.postHeader}>
-            <div className={style.userPosterInfo}>
+            <div
+              onClick={() => navigate(`/profile/${post.user.username}`)}
+              className={style.userPosterInfo}
+            >
               {post.user.avatar ? (
                 <img
                   src={`${import.meta.env.VITE_ENDPOINT}${post.user.avatar}`}

@@ -1,0 +1,76 @@
+.friendsSection {
+  margin-inline: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.friend {
+  display: flex;
+  gap: 40px;
+  border: 1px solid var(--primary-color);
+  flex-direction: column;
+  flex-basis: 20%;
+  min-width: 200px;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.title {
+  margin-bottom: 50px;
+}
+
+.imageUserWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  border: 1px solid var(--primary-color);
+  object-fit: cover;
+}
+.friendUsername {
+  /* min-width: 100px; */
+}
+.PSIcon {
+  color: #006fcd;
+}
+.PCIcon {
+  color: #e95722;
+}
+.XboxIcon {
+  color: #027900;
+}
+.platforms {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.singlePlatform {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  /* justify-content: center; */
+}
+.removeFriendBtn {
+  margin-top: auto;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: all 0.3s;
+  background-color: darkred;
+}
+@media (max-width: 470px) {
+    .friendsSection{
+        flex-direction: column;
+        align-items: center;
+    }
+}

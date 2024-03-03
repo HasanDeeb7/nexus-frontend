@@ -14,6 +14,7 @@ function GameCard({
   selectedGames = null,
   removeSelectedGame,
   isSelected = false,
+  viewOnly = false,
 }) {
   function renderPlatforms() {
     let result = [];
@@ -56,8 +57,12 @@ function GameCard({
       </figure>
     </motion.div>
   ) : (
-    <div className={style.gameCardContainer}>
-      <figure className={`${style.imageContainer} ${isSelected && style.disabledCard}`}>
+    <div className={`${style.gameCardContainer} ${viewOnly && style.readOnly}`}>
+      <figure
+        className={`${style.imageContainer} ${
+          isSelected && style.disabledCard
+        }`}
+      >
         <AnimatePresence mode="wait">
           {isSelected ? (
             <motion.div
@@ -88,7 +93,8 @@ function GameCard({
           className={style.gameImage}
           onClick={onClick}
         />
-      <div className={style.helperText}>Add Game</div>
+
+        <div className={style.helperText}>Add Game</div>
       </figure>
       <div className={style.gameInfo}>
         <p className={style.gameName}>{game.name}</p>

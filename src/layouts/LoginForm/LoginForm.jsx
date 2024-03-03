@@ -9,10 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useLoadingStore } from "../../Store/loadingStore";
 import { app } from "../../firebase";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { useNotificationStore } from "../../Store/notification";
 
 function LoginForm() {
   const navigate = useNavigate();
   const { user, setUser } = useUserStore();
+  const { setNotifications } = useNotificationStore();
   const { setLoadingWall } = useLoadingStore();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ username: false, password: false });
@@ -41,6 +43,7 @@ function LoginForm() {
       if (response) {
         console.log(response.data);
         setUser(response.data);
+        setNotifications(response.data.notifications);
         setLoading(false);
         setLoadingWall(true);
         setTimeout(() => {

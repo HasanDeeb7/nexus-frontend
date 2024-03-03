@@ -14,16 +14,48 @@ import axios from "axios";
 import { result } from "lodash";
 import { useLoadingStore } from "../../Store/loadingStore";
 import { AnimatePresence, motion } from "framer-motion";
+import { useNotificationStore } from "../../Store/notification";
+import Notification from "../Notification/Notification";
 
 function NavBar({ outlet = false }) {
   const navigate = useNavigate();
   const { logout } = useUserStore();
   const { user } = useUserStore();
+  const { markAllAsRead, notifications, newNotifications } =
+    useNotificationStore();
+  const [isNewNotifications, setIsNewNotifications] = useState(
+    notifications.length > 0
+  );
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const { setLoadingWall } = useLoadingStore();
   const [isNavOpen, setIsnavOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
   const [visible, setVisible] = useState(true);
+
+  async function markAsRead() {
+    try {
+      const response = await axios.patch(
+        `${import.meta.env.VITE_ENDPOINT}notification/all-read`
+      );
+      if (response) {
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function handleOpenNotifications() {
+    if (!isNotificationsOpen) {
+      setIsNotificationsOpen(true);
+    } else {
+      setIsNotificationsOpen(false);
+      setIsNewNotifications(false);
+      markAsRead();
+      markAllAsRead();
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,6 +73,10 @@ function NavBar({ outlet = false }) {
     };
   }, [prevScrollPos]);
 
+  useEffect(() => {
+    setIsNewNotifications(notifications.length > 0);
+  }, [notifications.length]);
+
   async function search() {
     console.log(query);
     try {
@@ -50,28 +86,33 @@ function NavBar({ outlet = false }) {
       );
       if (response) {
         console.log(response.data);
-        navigate("/search", { state: { data: response.data } });
+        navigate("/search", { state: { data: response.data, query: query } });
       }
     } catch (error) {
       console.log(response);
     }
   }
-
-  const keyDownHandler = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-
-      // 👇️ call submit function here
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
       search();
     }
-  };
+  }
 
-  useEffect(() => {
-    document.addEventListener("keydown", keyDownHandler);
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
-  }, [query]);
+  // const keyDownHandler = (event) => {
+  //   if (event.key === "Enter") {
+  //     event.preventDefault();
+
+  //     search();
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   document.addEventListener("keydown", keyDownHandler);
+  //   return () => {
+  //     document.removeEventListener("keydown", keyDownHandler);
+  //   };
+  // }, [query]);
 
   return (
     <AnimatePresence>
@@ -82,18 +123,18 @@ function NavBar({ outlet = false }) {
             animate={{ y: 0 }}
             exit={{ y: -100 }}
             transition={{ ease: "easeIn", duration: 0.2 }}
-            className={style.navBarContainer}
+            className={`${style.navBarContainer} ${
+              outlet && style.absoluteNav
+            }`}
             key={"navbar"}
           >
             <div>Logo</div>
-
             <div
               className={`${style.burgerMenu} ${isNavOpen && style.burgerOpen}`}
               onClick={() => setIsnavOpen(!isNavOpen)}
             >
               <LuMenu />
             </div>
-
             <div
               className={`${style.navBarContentContainer} ${
                 isNavOpen && style.navBarOpen
@@ -146,6 +187,7 @@ function NavBar({ outlet = false }) {
                   placeholder="Search..."
                   className={style.searchInput}
                   value={query}
+                  onKeyDown={handleKeyDown}
                   onChange={(e) => {
                     setQuery(e.target.value);
                   }}
@@ -164,9 +206,23 @@ function NavBar({ outlet = false }) {
                   <LuPlus className={style.addPostIcon} />
                   <span className={style.actionLabel}>Create Post</span>
                 </li>
-                <li className={style.headerNavItem}>
-                  <TbBellRinging2Filled className={style.notificationsIcon} />
-                </li>
+                <div
+                  className={style.notificationsNavContainer}
+                  onClick={handleOpenNotifications}
+                >
+                  <li
+                    className={`${style.headerNavItem} ${
+                      isNewNotifications && style.unreadNotifications
+                    }`}
+                  >
+                    <TbBellRinging2Filled
+                      className={`${style.notificationsIcon} `}
+                    />
+                  </li>
+                  {isNotificationsOpen && (
+                    <Notification isOpen={isNotificationsOpen} />
+                  )}
+                </div>
                 <li className={style.profileHeadNav}>
                   <NavLink
                     to={"/myProfile"}

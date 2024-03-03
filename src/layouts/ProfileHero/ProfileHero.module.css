@@ -1,6 +1,7 @@
 .profilePage {
   display: flex;
   flex-direction: column;
+  
 }
 .heroSection {
   width: 100%;

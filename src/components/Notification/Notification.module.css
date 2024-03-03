@@ -1,0 +1,29 @@
+.notificationsContainer {
+  position: absolute;
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 20px 0;
+  top: 0;
+  left: calc((-200px + 44px) / 2);
+  width: 200px;
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  max-height: 290px;
+  overflow: auto;
+}
+.notificationMessage {
+  border-bottom: 1px solid #878787;
+  padding: 10px;
+  transition: all 0.3s;
+}
+.notificationMessage:hover {
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+.noNotificationHelper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

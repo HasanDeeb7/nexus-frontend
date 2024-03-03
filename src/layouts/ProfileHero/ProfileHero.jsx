@@ -5,7 +5,9 @@ import { LiaXbox } from "react-icons/lia";
 import { LuPcCase } from "react-icons/lu";
 import { AnimatePresence, animate, motion } from "framer-motion";
 import { useUserStore } from "../../Store/userStore";
+import Avvvatar from "avvvatars-react";
 import bgPattern from "/public/videos/bgPattern.mp4";
+
 function ProfileHero({ userProfile, addFriend }) {
   const [activeDialog, setActiveDialog] = useState(false);
   const dialogRef = useRef([]);
@@ -63,14 +65,20 @@ function ProfileHero({ userProfile, addFriend }) {
       <div className={style.userHeroSection}>
         <div className={style.userInfoWrapper}>
           <figure className={style.imageWrapper}>
-            <img
-              src={`${import.meta.env.VITE_ENDPOINT}${userProfile.avatar}`}
-              alt=""
-              className={style.userAvatar}
-            />
+            {userProfile.avatar ? (
+              <img
+                src={`${import.meta.env.VITE_ENDPOINT}${userProfile.avatar}`}
+                alt=""
+                className={style.userAvatar}
+              />
+            ) : (
+              <Avvvatar value={userProfile.username} size={120} />
+            )}
             {user._id != userProfile._id ? (
               user.friends?.some((item) => item._id === userProfile._id) ? (
-                <button className={style.removeFriend}>Leave</button>
+                <button className={style.removeFriend} onClick={addFriend}>
+                  Leave
+                </button>
               ) : (
                 <button className={style.addFriendBtn} onClick={addFriend}>
                   Join

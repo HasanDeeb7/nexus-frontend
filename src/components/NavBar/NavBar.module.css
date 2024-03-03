@@ -13,6 +13,9 @@
   background: #1e1e1e;
   z-index: 100;
 }
+.absoluteNav {
+  position: absolute;
+}
 .navBarContentContainer {
   display: flex;
   justify-content: space-between;
@@ -51,10 +54,25 @@
   cursor: pointer;
   padding: 10px;
   border-radius: 5px;
+  position: relative;
 }
 .headerNavItem:hover {
   color: #fff;
   background-color: var(--primary-color);
+}
+.notificationsNavContainer {
+  position: relative;
+}
+
+.unreadNotifications::after {
+  content: " ";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
 }
 .notificationsIcon,
 .logoutIcon {

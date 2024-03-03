@@ -7,6 +7,7 @@ import { useUserStore } from "../../Store/userStore";
 import { LuHeart } from "react-icons/lu";
 import { LuHeartCrack } from "react-icons/lu";
 import { IoChatbubbleOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 function CreatePost() {
   const { user } = useUserStore();
   const [games, setGames] = useState();
@@ -86,10 +87,16 @@ function CreatePost() {
   async function createPost() {
     if (!acceptedFiles || acceptedFiles.length === 0) {
       console.log("No files selected.");
-      return;
+      // return;
     }
     console.log(acceptedFiles);
-
+    if (
+      [caption, acceptedFiles, gameQuery, postType].some(
+        (value) => !value || value === ""
+      )
+    ) {
+      return toast.error("All fields are required");
+    }
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_ENDPOINT}post/create`,
@@ -122,9 +129,9 @@ function CreatePost() {
   return (
     !loading && (
       <section className={style.createPage}>
-        <h1>Add a Post</h1>
         <div className={style.mainContentContainer}>
           <div className={style.PostFormConatiner}>
+            <h1>Add a Post</h1>
             <label htmlFor="caption">Caption:</label>
             <div style={{ position: "relative", marginBottom: "10px" }}>
               <textarea
@@ -185,6 +192,8 @@ function CreatePost() {
             </button>
           </div>
           <div className={style.postPreviewContainer}>
+            <h1>Preview</h1>
+
             <div className={style.postPreview}>
               <div className={style.postHeader}>
                 <div className={style.userPosterInfo}>
@@ -235,12 +244,6 @@ function CreatePost() {
                       reaction === "liked" && style.selectedReaction
                     }`}
                     onClick={() => setReaction("liked")}
-                  />
-                  <LuHeartCrack
-                    className={`${style.dislikeIcon} ${
-                      reaction === "disliked" && style.selectedReaction
-                    }`}
-                    onClick={() => setReaction("disliked")}
                   />
                 </div>
                 <div className={style.postCommentButtonContainer}>

@@ -1,7 +1,7 @@
 .profilePage {
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-block: 100px;
 }
 .heroSection {
   width: 100%;
@@ -163,7 +163,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 20px 40px;
+  padding-block: 20px;
   transition: all 0.3s;
   position: relative;
   z-index: 1;
@@ -180,4 +180,9 @@
   height: 100%;
   z-index: -1;
   background-color: var(--primary-color);
+}
+.settingsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }

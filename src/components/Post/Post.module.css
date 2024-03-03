@@ -203,4 +203,8 @@
   align-items: center;
   justify-content: center;
   object-fit: cover;
+  transition: all 0.3s;
+}
+.miniPreviewImage:hover {
+  filter: brightness(0.5);
 }
