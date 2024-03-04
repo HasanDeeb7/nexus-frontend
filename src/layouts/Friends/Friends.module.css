@@ -16,6 +16,7 @@
   padding: 10px;
   background-size: 100%;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .title {
@@ -69,8 +70,8 @@
   background-color: darkred;
 }
 @media (max-width: 470px) {
-    .friendsSection{
-        flex-direction: column;
-        align-items: center;
-    }
+  .friendsSection {
+    flex-direction: column;
+    align-items: center;
+  }
 }

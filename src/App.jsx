@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import CustomToast from "./components/CustomToast/CustomToast";
 import { useNavigate } from "react-router-dom";
 import { useNotificationStore } from "./Store/notification";
+import { useChatStore } from "./Store/publicChat";
 
 export const socket = io(import.meta.env.VITE_SOCKET);
 
@@ -19,6 +20,7 @@ axios.defaults.withCredentials = true;
 
 function App() {
   const navigate = useNavigate();
+  const { privateChatOpen } = useChatStore();
   const { user, setUser } = useUserStore();
   const { setNotifications } = useNotificationStore();
   const { proggressBar, setProgress, loadingWall, loading, setLoading } =
@@ -69,6 +71,20 @@ function App() {
           }
         );
         setNotifications((prevNotifications) => [...prevNotifications, data]);
+      });
+      socket.on("receive-message", (data) => {
+        console.log(data);
+        if (!privateChatOpen) {
+          toast(
+            <CustomToast
+              onClick={() => navigate(`/chat`)}
+              message={`${data.sender} : ${data.message}`}
+            />,
+            {
+              position: "top-right",
+            }
+          );
+        }
       });
     }
   }, [socket, user]);

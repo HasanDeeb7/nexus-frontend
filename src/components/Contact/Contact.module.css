@@ -1,0 +1,23 @@
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #878787;
+  padding-block: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.contact:hover {
+  filter: brightness(0.5);
+}
+.activeContact{
+    background-color: var(--primary-color);
+}
+
+.contactAvatar {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50px;
+  border: 1px solid var(--primary-color);
+}

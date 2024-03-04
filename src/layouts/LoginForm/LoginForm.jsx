@@ -17,7 +17,11 @@ function LoginForm() {
   const { setNotifications } = useNotificationStore();
   const { setLoadingWall } = useLoadingStore();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({ username: false, password: false });
+  const [error, setError] = useState({
+    username: false,
+    password: false,
+    network: false,
+  });
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -51,6 +55,7 @@ function LoginForm() {
         }, 1000);
       }
     } catch (error) {
+      setError({ ...error, network: true });
       console.log(error);
       setLoading(false);
     }
@@ -97,6 +102,7 @@ function LoginForm() {
       transition={{ duration: 0.1, ease: "easeOut" }}
       className={style.loginFormContainer}
     >
+      {error.network && <h1 style={{ color: "#ff1020" }}>Network Error</h1>}
       <div className={style.inputsContainer}>
         <Input
           value={credentials}

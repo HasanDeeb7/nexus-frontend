@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { usePublicChatStore } from "../../Store/publicChat";
+import { useChatStore } from "../../Store/publicChat";
 import ChatMessage from "../../components/ChatMessage/ChatMessage";
 import style from "./PublicChat.module.css";
 import { socket } from "../../App";
 import { useUserStore } from "../../Store/userStore";
 
 function PublicChat() {
-  const { messages, setMessages } = usePublicChatStore();
+  const { messages, setMessages } = useChatStore();
   const [newMessage, setNewMessage] = useState("");
   const { user } = useUserStore();
   function sendMessage() {

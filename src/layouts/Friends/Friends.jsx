@@ -6,8 +6,10 @@ import Avvvatars from "avvvatars-react";
 import { useUserStore } from "../../Store/userStore";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Friends({ title, user: userProfile }) {
+  const navigate = useNavigate();
   const { user, setUser } = useUserStore();
   const [friends, setFriends] = useState(userProfile.friends);
   const platformIcons = {
@@ -46,6 +48,7 @@ function Friends({ title, user: userProfile }) {
       <div className={style.friendsSection}>
         {friends.map((item, idx) => (
           <div
+            onClick={() => navigate(`/profile/${item.username}`)}
             className={style.friend}
             style={{
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(${

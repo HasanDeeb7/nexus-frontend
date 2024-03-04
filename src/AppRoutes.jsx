@@ -16,6 +16,7 @@ import SinglePost from "./pages/SinglePost/SinglePost";
 import ProfilePage from "./pages/Profile Page/ProfilePage";
 import NavBar from "./components/NavBar/NavBar";
 import SearchResult from "./pages/SearchResult/SearchResult";
+import ChatPage from "./pages/ChatPage/ChatPage";
 function AppRoutes() {
   const { user } = useUserStore();
   return (
@@ -40,9 +41,9 @@ function AppRoutes() {
         <Route path="/" element={<Layout />}>
           <Route path="home" element={<FYPage />} />
           <Route path="explore" element={<ExplorePage />} />
-          {/* <Route path="chat" element={<FYPage />} />
-          <Route path="fypage" element={<FYPage />} /> */}
+          {/* <Route path="fypage" element={<FYPage />} /> */}
         </Route>
+        <Route path="/chat" element={<ChatPage />} />
         <Route path="/" element={<NavBar outlet />}>
           <Route path="comments/:postId" element={<SinglePost />} />
           <Route path="myProfile" element={<ProfilePage />} />

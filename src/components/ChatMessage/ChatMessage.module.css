@@ -11,9 +11,15 @@
 .messageSender {
   align-items: flex-end;
   background: var(--primary-color);
-  align-self:flex-end ;
+  align-self: flex-end;
 }
 .messageReceiver {
   align-items: flex-start;
   background: #1e1e1e;
+}
+.messageSender > .time {
+  margin-right: auto;
+}
+.messageReceiver > .time {
+  margin-left : auto;
 }

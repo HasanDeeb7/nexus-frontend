@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import style from "./ProfilePage.module.css";
 import { useUserStore } from "../../Store/userStore";
 
@@ -11,6 +11,11 @@ import ProfilePlatform from "../../layouts/ProfilePlatform/ProfilePlatform";
 import { socket } from "../../App";
 import UserGames from "../../layouts/UserGames/UserGames";
 import Friends from "../../layouts/Friends/Friends";
+
+export function Redirect({ to }) {
+  const navigate = useNavigate();
+}
+
 function ProfilePage() {
   const { user, setUser } = useUserStore();
   const [loading, setLoading] = useState(true);
@@ -66,7 +71,9 @@ function ProfilePage() {
   }
 
   useEffect(() => {
+    setLoading(true);
     getUser();
+    console.log("effectsssssssss");
   }, [username]);
 
   return (
