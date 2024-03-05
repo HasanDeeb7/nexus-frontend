@@ -2,5 +2,16 @@
   width: 300px;
   background-color: #121212;
   min-height: calc(100vh - 100px);
-  
+}
+.chatContactsLayout > h2 {
+  text-align: center;
+  margin-block: 10px;
+}
+@media (max-width: 550px) {
+  .chatContactsLayout {
+    /* display: none; */
+  }
+  .hiddenContacts {
+    display: none;
+  }
 }

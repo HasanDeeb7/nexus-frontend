@@ -1,0 +1,41 @@
+.featureCard {
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  justify-content: space-between;
+  /* height: 300px; */
+  align-items: center;
+  padding-inline: 100px;
+}
+
+.featureImage {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: top;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+}
+.leftPositionImage {
+  object-position: left;
+}
+.reversed {
+  flex-direction: row-reverse;
+}
+.featureContent {
+  display: flex;
+  flex-direction: column;
+  max-width: 380px;
+  font-size: 20px;
+}
+@media (max-width: 990px) {
+  .featureCard {
+    flex-direction: column-reverse;
+    gap: 30px;
+    width: 100%;
+  }
+  .featureContent {
+    max-width: 400px;
+  }
+}

@@ -94,7 +94,9 @@ function GameCard({
           onClick={onClick}
         />
 
-        <div className={style.helperText}>Add Game</div>
+        <div className={style.helperText} onClick={onClick}>
+          Add Game
+        </div>
       </figure>
       <div className={style.gameInfo}>
         <p className={style.gameName}>{game.name}</p>

@@ -4,7 +4,6 @@ import style from "./ChatMessage.module.css";
 
 function ChatMessage({ username, message, privateMessage = false, time }) {
   const { user } = useUserStore();
-  console.log(time);
   return (
     <div
       className={`${style.message} ${

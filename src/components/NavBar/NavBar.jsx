@@ -16,8 +16,8 @@ import { useLoadingStore } from "../../Store/loadingStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNotificationStore } from "../../Store/notification";
 import Notification from "../Notification/Notification";
-
-function NavBar({ outlet = false }) {
+import logo from "../../assets/NeXus.svg";
+function NavBar({ outlet = false, minimal = false }) {
   const navigate = useNavigate();
   const { logout } = useUserStore();
   const { user } = useUserStore();
@@ -128,7 +128,9 @@ function NavBar({ outlet = false }) {
             }`}
             key={"navbar"}
           >
-            <div>Logo</div>
+            <div>
+              <img src={logo} alt="" className={style.logo} />
+            </div>
             <div
               className={`${style.burgerMenu} ${isNavOpen && style.burgerOpen}`}
               onClick={() => setIsnavOpen(!isNavOpen)}
@@ -140,114 +142,127 @@ function NavBar({ outlet = false }) {
                 isNavOpen && style.navBarOpen
               }`}
             >
-              <ul className={style.navItemsContainer}>
-                <li className={style.navItemWrapper}>
-                  <NavLink
-                    to={"/home"}
-                    onClick={() => setLoadingWall(true)}
-                    className={({ isActive }) =>
-                      isActive ? style.activeLink : style.navItem
-                    }
-                  >
-                    <TiHome className={style.navIcon} />
-                    <span className={style.linkLabel}>Home</span>
-                  </NavLink>
-                </li>
-                <li className={style.navItemWrapper}>
-                  <NavLink
-                    to={"/explore"}
-                    onClick={() => setLoadingWall(true)}
-                    className={({ isActive }) =>
-                      isActive ? style.activeLink : style.navItem
-                    }
-                  >
-                    {/* <TiHome className={style.navIcon} /> */}
-                    <TiCompass className={style.navIcon} />
+              {!minimal ? (
+                <>
+                  <ul className={style.navItemsContainer}>
+                    <li className={style.navItemWrapper}>
+                      <NavLink
+                        to={"/home"}
+                        onClick={() => setLoadingWall(true)}
+                        className={({ isActive }) =>
+                          isActive ? style.activeLink : style.navItem
+                        }
+                      >
+                        <TiHome className={style.navIcon} />
+                        <span className={style.linkLabel}>Home</span>
+                      </NavLink>
+                    </li>
+                    <li className={style.navItemWrapper}>
+                      <NavLink
+                        to={"/explore"}
+                        onClick={() => setLoadingWall(true)}
+                        className={({ isActive }) =>
+                          isActive ? style.activeLink : style.navItem
+                        }
+                      >
+                        {/* <TiHome className={style.navIcon} /> */}
+                        <TiCompass className={style.navIcon} />
 
-                    <span className={style.linkLabel}>Explore</span>
-                  </NavLink>
-                </li>
-                <li className={style.navItemWrapper}>
-                  <NavLink
-                    to={"/chat"}
-                    className={({ isActive }) =>
-                      isActive ? style.activeLink : style.navItem
-                    }
-                  >
-                    <IoChatbubblesOutline className={style.navIcon} />
-                    <span className={style.linkLabel}>Chat</span>
-                  </NavLink>
-                </li>
+                        <span className={style.linkLabel}>Explore</span>
+                      </NavLink>
+                    </li>
+                    <li className={style.navItemWrapper}>
+                      <NavLink
+                        to={"/chat"}
+                        className={({ isActive }) =>
+                          isActive ? style.activeLink : style.navItem
+                        }
+                      >
+                        <IoChatbubblesOutline className={style.navIcon} />
+                        <span className={style.linkLabel}>Chat</span>
+                      </NavLink>
+                    </li>
 
-                <li className={style.navItemWrapper}></li>
-              </ul>
-              <div className={style.searchContainer}>
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className={style.searchInput}
-                  value={query}
-                  onKeyDown={handleKeyDown}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
-                  }}
-                />
-                <LuSearch
-                  size={20}
-                  color="#959DA5"
-                  className={style.searchIcon}
-                />
-              </div>
-              <ul className={style.navItemsContainer}>
-                <li
-                  className={style.headerNavItem}
-                  onClick={() => navigate("/post")}
-                >
-                  <LuPlus className={style.addPostIcon} />
-                  <span className={style.actionLabel}>Create Post</span>
-                </li>
-                <div
-                  className={style.notificationsNavContainer}
-                  onClick={handleOpenNotifications}
-                >
-                  <li
-                    className={`${style.headerNavItem} ${
-                      isNewNotifications && style.unreadNotifications
-                    }`}
-                  >
-                    <TbBellRinging2Filled
-                      className={`${style.notificationsIcon} `}
+                    <li className={style.navItemWrapper}></li>
+                  </ul>
+                  <div className={style.searchContainer}>
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      className={style.searchInput}
+                      value={query}
+                      onKeyDown={handleKeyDown}
+                      onChange={(e) => {
+                        setQuery(e.target.value);
+                      }}
                     />
-                  </li>
-                  {isNotificationsOpen && (
-                    <Notification isOpen={isNotificationsOpen} />
-                  )}
-                </div>
-                <li className={style.profileHeadNav}>
-                  <NavLink
-                    to={"/myProfile"}
-                    replace
-                    // className={({ isActive }) =>
-                    //   isActive ? style.activeLink : style.navItem
-                    // }
-                  >
-                    {user.avatar ? (
-                      <img
-                        src={`${import.meta.env.VITE_ENDPOINT}${user.avatar}`}
-                        className={style.userImage}
+                    <LuSearch
+                      size={20}
+                      color="#959DA5"
+                      className={style.searchIcon}
+                    />
+                  </div>
+                  <ul className={style.navItemsContainer}>
+                    <li
+                      className={style.headerNavItem}
+                      onClick={() => navigate("/post")}
+                    >
+                      <LuPlus className={style.addPostIcon} />
+                      <span className={style.actionLabel}>Create Post</span>
+                    </li>
+                    <div
+                      className={style.notificationsNavContainer}
+                      onClick={handleOpenNotifications}
+                    >
+                      <li
+                        className={`${style.headerNavItem} ${
+                          isNewNotifications && style.unreadNotifications
+                        }`}
+                      >
+                        <TbBellRinging2Filled
+                          className={`${style.notificationsIcon} `}
+                        />
+                      </li>
+                      {isNotificationsOpen && (
+                        <Notification isOpen={isNotificationsOpen} />
+                      )}
+                    </div>
+                    <li className={style.profileHeadNav}>
+                      <NavLink
+                        to={"/myProfile"}
+                        replace
+                        // className={({ isActive }) =>
+                        //   isActive ? style.activeLink : style.navItem
+                        // }
+                      >
+                        {user.avatar ? (
+                          <img
+                            src={`${import.meta.env.VITE_ENDPOINT}${
+                              user.avatar
+                            }`}
+                            className={style.userImage}
+                          />
+                        ) : (
+                          <Avvvatars value={user.username} size={34} />
+                        )}
+                      </NavLink>
+                    </li>
+                    <li className={style.headerNavItem}>
+                      <LuLogOut
+                        className={style.logoutIcon}
+                        onClick={() => logout()}
                       />
-                    ) : (
-                      <Avvvatars value={user.username} size={34} />
-                    )}
-                  </NavLink>
+                    </li>
+                  </ul>{" "}
+                </>
+              ) : (
+                <li
+                  className={style.signInBtn}
+                  onClick={() => navigate("/login")}
+                >
+                  Sign in
                 </li>
-                <li className={style.headerNavItem}>
-                  <LuLogOut
-                    className={style.logoutIcon}
-                    onClick={() => logout()}
-                  />
-                </li>
-              </ul>
+              )}
             </div>
           </motion.section>
           {outlet && <Outlet />}

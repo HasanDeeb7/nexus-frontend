@@ -26,6 +26,13 @@ function LoginForm() {
     username: "",
     password: "",
   });
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      signIn();
+    }
+  }
+
   async function signIn() {
     if (
       Object.entries(credentials).some((item) => {
@@ -51,7 +58,7 @@ function LoginForm() {
         setLoading(false);
         setLoadingWall(true);
         setTimeout(() => {
-          navigate("/");
+          navigate("/home");
         }, 1000);
       }
     } catch (error) {
@@ -110,6 +117,7 @@ function LoginForm() {
           label={"Username"}
           control={"username"}
           isDisabled={loading}
+          onKeyDown={handleKeyDown}
         />
         <Input
           value={credentials}
@@ -118,6 +126,7 @@ function LoginForm() {
           control={"password"}
           type="password"
           isDisabled={loading}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <div className={style.btnsContainer}>

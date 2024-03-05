@@ -73,7 +73,6 @@ function ProfilePage() {
   useEffect(() => {
     setLoading(true);
     getUser();
-    console.log("effectsssssssss");
   }, [username]);
 
   return (

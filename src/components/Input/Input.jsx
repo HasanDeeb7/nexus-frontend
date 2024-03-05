@@ -18,6 +18,7 @@ function Input({
   errorMessage = "",
   onChange = null,
   placeholder = "",
+  onKeyDown,
 }) {
   const [isShown, setIsShown] = useState(false);
   function handleChange(e) {
@@ -48,6 +49,7 @@ function Input({
               onChange={onChange ? onChange : handleChange}
               disabled={isDisabled}
               placeholder={placeholder}
+              onKeyDown={onKeyDown}
             />
             {required && <div className={style.requiredInput}></div>}
             {type === "password" &&

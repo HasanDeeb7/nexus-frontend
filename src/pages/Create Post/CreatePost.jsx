@@ -8,6 +8,7 @@ import { LuHeart } from "react-icons/lu";
 import { LuHeartCrack } from "react-icons/lu";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 function CreatePost() {
   const { user } = useUserStore();
   const [games, setGames] = useState();
@@ -20,6 +21,7 @@ function CreatePost() {
   const [gameQuery, setGameQuery] = useState("");
   const [image, setImage] = useState();
   const [debounceTimer, setDebounceTimer] = useState(null);
+  const navigate = useNavigate();
 
   async function getGames() {
     try {
@@ -91,7 +93,7 @@ function CreatePost() {
     }
     console.log(acceptedFiles);
     if (
-      [caption, acceptedFiles, gameQuery, postType].some(
+      [acceptedFiles, gameQuery, postType].some(
         (value) => !value || value === ""
       )
     ) {
@@ -111,6 +113,8 @@ function CreatePost() {
       );
       if (response) {
         console.log(response.data);
+        navigate("/home");
+        toast("Post created Successfully");
       }
     } catch (error) {
       console.log(error);

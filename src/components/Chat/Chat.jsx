@@ -5,7 +5,9 @@ import { TbSend } from "react-icons/tb";
 import pattern1 from "/images/pattern1.jpg";
 import { socket } from "../../App";
 import ChatMessage from "../ChatMessage/ChatMessage";
-function Chat({ chatData, activeChat, setChatData }) {
+import { HiArrowUturnLeft } from "react-icons/hi2";
+
+function Chat({ chatData, activeChat, setChatData, setActiveChat }) {
   const messageEl = useRef(null);
 
   const { user } = useUserStore();
@@ -68,6 +70,7 @@ function Chat({ chatData, activeChat, setChatData }) {
 
   return (
     <div className={style.chat}>
+      {activeChat && <HiArrowUturnLeft onClick={() => setActiveChat(null)} className={style.arrowIcon} />}
       <img src={pattern1} alt="" className={style.bgImage} />
       <div className={style.chatDataContainer} ref={messageEl}>
         {chatData.map((message) => (
@@ -97,7 +100,7 @@ function Chat({ chatData, activeChat, setChatData }) {
             onKeyDown={handleKeyDown}
           />
           <button className={style.sendBtn}>
-            <TbSend className={style.sendIcon} />
+            <TbSend className={style.sendIcon} onClick={sendMessage} />
           </button>
         </div>
       )}

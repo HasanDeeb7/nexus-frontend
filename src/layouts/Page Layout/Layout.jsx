@@ -25,7 +25,7 @@ function Layout() {
           <source src={video} />
         </video>
       </div> */}
-
+  
       <div className={style.pageBackground}>
         {/* <img src={pattern3} alt="" /> */}
       </div>

@@ -60,3 +60,18 @@
   flex-direction: column;
   padding-inline: 10px;
 }
+.arrowIcon {
+  display: none;
+}
+@media (max-width: 550px) {
+  .arrowIcon {
+    display: block;
+    position: absolute;
+    font-size: 30px;
+    top: 10px;
+    left: 10px;
+  }
+  .chatDataContainer {
+    padding: 45px 0;
+  }
+}

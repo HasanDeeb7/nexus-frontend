@@ -17,13 +17,15 @@ import ProfilePage from "./pages/Profile Page/ProfilePage";
 import NavBar from "./components/NavBar/NavBar";
 import SearchResult from "./pages/SearchResult/SearchResult";
 import ChatPage from "./pages/ChatPage/ChatPage";
+import LandingPage from "./pages/LandingPage/LandingPage";
 function AppRoutes() {
   const { user } = useUserStore();
   return (
     <Routes>
+      <Route path="/welcome" element={<LandingPage />} />
       <Route path="/login" element={<Registration />} />
       <Route
-        element={<ProtectedRoute isAllowed={user} redirectPath="/login" />}
+        element={<ProtectedRoute isAllowed={user} redirectPath="/welcome" />}
       >
         <Route path="/verify" element={<VerifyAccount />} />
         <Route

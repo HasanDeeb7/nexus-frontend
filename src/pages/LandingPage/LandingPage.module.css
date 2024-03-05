@@ -1,0 +1,46 @@
+.landingPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-bottom: 40px;
+}
+
+.hero,
+.features,
+.cta {
+  /* padding: 50px; */
+  text-align: center;
+  flex: 1; /* Make sections take up equal space (optional) */
+}
+
+.hero {
+  background-color: var(--main-bg-colo); /* Light gray background */
+}
+
+.features {
+  background-color: var(
+    --main-bg-color
+  ); /* White background for features section */
+}
+
+.featuresTitle {
+  color: #3f51b5; /* Purple for features title */
+}
+.ctaButton {
+  padding: 10px 80px;
+  font-size: 20px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.ctaButton:hover {
+  filter: brightness(0.5);
+}
+@media (max-width: 740px) {
+  .features {
+    display: flex;
+    flex-direction: column;
+  }
+}

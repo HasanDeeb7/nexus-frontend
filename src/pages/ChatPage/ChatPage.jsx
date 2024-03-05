@@ -41,11 +41,12 @@ function ChatPage() {
       <NavBar />
       <div className={style.chatPage}>
         <ChatContacts chatWith={chatWith} activeChat={activeChat} />
-        {!loading && (
+        {!loading && activeChat && (
           <Chat
             chatData={chatData}
             activeChat={activeChat}
             setChatData={setChatData}
+            setActiveChat={setActiveChat}
           />
         )}
       </div>

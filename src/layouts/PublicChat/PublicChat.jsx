@@ -4,6 +4,7 @@ import ChatMessage from "../../components/ChatMessage/ChatMessage";
 import style from "./PublicChat.module.css";
 import { socket } from "../../App";
 import { useUserStore } from "../../Store/userStore";
+import convertISOToDateTime from "../../utils/convertTime";
 
 function PublicChat() {
   const { messages, setMessages } = useChatStore();
@@ -16,15 +17,24 @@ function PublicChat() {
     socket.emit("broadcast-message", {
       message: newMessage,
       username: user.username,
+      time: new Date(),
     });
-    setMessages({ message: newMessage, username: user.username });
+    setMessages({
+      message: newMessage,
+      username: user.username,
+      time: new Date(),
+    });
     console.log(messages);
     setNewMessage("");
   }
 
   useEffect(() => {
-    socket.on("receive-broadcast-message", ({ username, message }) => {
-      setMessages({ username: username, message: message });
+    socket.on("receive-broadcast-message", ({ username, message, time }) => {
+      setMessages({
+        username: username,
+        message: message,
+        time: time,
+      });
     });
   }, []);
 
@@ -49,7 +59,11 @@ function PublicChat() {
       <h1>Broadcast</h1>
       <div className={style.chatContentWrapper}>
         {messages.map((item) => (
-          <ChatMessage username={item.username} message={item.message} />
+          <ChatMessage
+            username={item.username}
+            message={item.message}
+            time={item.time}
+          />
         ))}
       </div>
       <div className={style.inputWrapper}>
