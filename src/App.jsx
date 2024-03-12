@@ -14,8 +14,8 @@ import { useNavigate } from "react-router-dom";
 import { useNotificationStore } from "./Store/notification";
 import { useChatStore } from "./Store/publicChat";
 
-export const socket = io(import.meta.env.VITE_SOCKET);
-// export const socket = io("wss://nexus-backend-p3y6.onrender.com");
+// export const socket = io(import.meta.env.VITE_SOCKET);
+export const socket = io("wss://nexus-backend-p3y6.onrender.com");
 
 axios.defaults.withCredentials = true;
 
