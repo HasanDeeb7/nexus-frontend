@@ -5,22 +5,22 @@ function FeatureCard({ image, title, description, reverse, index }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ delay: 0.2, duration: 0.5 }}
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 1 }}
       className={`${styles.featureCard} ${reverse && styles.reversed}`}
     >
-      <img
+      <motion.img
         className={`${styles.featureImage} ${
           index === 1 && styles.leftPositionImage
         }`}
         src={image}
         alt={title}
       />
-      <div className={styles.featureContent}>
-        <h3>{title}</h3>
-        <p>{description}</p>
-      </div>
+      <motion.div className={styles.featureContent}>
+        <h3 className={styles.featureTitle}>{title}</h3>
+        <p className={styles.featureDescription}>{description}</p>
+      </motion.div>
     </motion.div>
   );
 }

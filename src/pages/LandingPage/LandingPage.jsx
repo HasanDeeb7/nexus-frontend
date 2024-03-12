@@ -7,6 +7,7 @@ import chatImage from "/images/Broadcast.png";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
+import { useLoadingStore } from "../../Store/loadingStore";
 const featuresData = [
   {
     image: postImage, // Replace with your image path
@@ -31,10 +32,17 @@ const featuresData = [
 ];
 function LandingPage() {
   const navigate = useNavigate();
+  const { setLoadingWall } = useLoadingStore();
+  function handleNavigate(path) {
+    setLoadingWall(true);
+    setTimeout(() => {
+      navigate(path);
+    }, 500);
+  }
 
   return (
     <>
-      <NavBar minimal />
+      <NavBar minimal handleNavigate={handleNavigate} />
       <div className={styles.landingPage}>
         <section className={styles.hero}>
           <HeroSection />
@@ -50,7 +58,7 @@ function LandingPage() {
         <section className={styles.cta}>
           <button
             className={styles.ctaButton}
-            onClick={() => navigate("/login")}
+            onClick={() => handleNavigate("/login")}
           >
             Sign Up Now!
           </button>

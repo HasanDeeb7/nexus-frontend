@@ -17,7 +17,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useNotificationStore } from "../../Store/notification";
 import Notification from "../Notification/Notification";
 import logo from "../../assets/NeXus.svg";
-function NavBar({ outlet = false, minimal = false }) {
+function NavBar({ outlet = false, minimal = false, handleNavigate }) {
   const navigate = useNavigate();
   const { logout } = useUserStore();
   const { user } = useUserStore();
@@ -258,7 +258,7 @@ function NavBar({ outlet = false, minimal = false }) {
               ) : (
                 <li
                   className={style.signInBtn}
-                  onClick={() => navigate("/login")}
+                  onClick={() => handleNavigate("/login")}
                 >
                   Sign in
                 </li>

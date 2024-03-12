@@ -2,11 +2,19 @@ import style from "./Registration.module.css";
 import LoginForm from "../../layouts/LoginForm/LoginForm";
 import map from "/images/map.jpg";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SignupForm from "../../layouts/SignupForm/SignupForm";
 import { AnimatePresence } from "framer-motion";
+import { useLoadingStore } from "../../Store/loadingStore";
 function Registration() {
   const [activeForm, setActiveForm] = useState("login");
+  const { setLoadingWall } = useLoadingStore();
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadingWall(false);
+    }, 500);
+  }, []);
+
   return (
     <>
       <img src={map} alt="" className={style.image} />

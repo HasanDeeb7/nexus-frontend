@@ -9,14 +9,10 @@
 }
 .image {
   height: auto;
-  object-fit: contain;
-  width: 20%;
+  object-fit: cover;
+  width: 18%;
 }
-.image1 {
-  height: auto;
-  object-fit: contain;
-  width: 30%;
-}
+
 .HeroImgContainer {
   display: flex;
   width: 100%;
@@ -29,7 +25,7 @@
   width: 100%;
   height: 100vh;
   left: 0;
-  filter: blur(5px) brightness(0.3);
+  filter: blur(30px) brightness(0.3);
   object-fit: cover;
   z-index: -2;
 }
@@ -44,7 +40,20 @@
   font-size: 25px;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 38%;
   transform: translate(-45%, -100px);
   border-radius: 10px;
+}
+.neonText {
+  font-size: 48px;
+
+  color: white;
+  text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-color),
+    0 0 30px var(--secondary-color), 0 0 30px var(--primary-color),
+    0 0 30px var(--primary-color);
+}
+@media (max-width: 500px) {
+  .subheading {
+    font-size: 12px;
+  }
 }
