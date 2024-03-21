@@ -26,7 +26,7 @@ function VerifyAccount() {
       setProgress(50);
 
       if (response) {
-         (response);
+        response;
         setLoading(false);
         setCodeSent(true);
         setProgress(100);
@@ -44,7 +44,7 @@ function VerifyAccount() {
         { code: verificationCode }
       );
       if (response) {
-         (response.data);
+        response.data;
         setUser({ ...user, isVerified: true });
         setProgress(100);
         navigate("/avatar");
@@ -86,7 +86,7 @@ function VerifyAccount() {
                   <h2>Check Your Inbox</h2>
                 </div>
                 <p>
-                  We have sent the code to
+                  We have sent the code to{" "}
                   <span className={style.boldEmail}>
                     {user.email}. Check your inbox and submit the received code
                   </span>
