@@ -19,12 +19,12 @@ function Comment({ comment, onLike, idx, comments, setComments }) {
         { params: { commentId: comment._id, postId: comment.post } }
       );
       if (response) {
-        console.log(response.data);
+         (response.data);
         const newComments = comments.filter((item, index) => item != comment);
         setComments(newComments);
 
         // setComments(response.data);
-        // console.log(newComments);
+        //  (newComments);
       }
     } catch (error) {
       console.log(error);

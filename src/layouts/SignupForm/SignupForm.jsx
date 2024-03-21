@@ -82,7 +82,7 @@ function SignupForm() {
       );
       if (response) {
         setProgress(80);
-        console.log(response.data);
+         (response.data);
         setUser(response.data);
         setNotifications(
           response.data.notifications?.filter((item) => item.isRead)

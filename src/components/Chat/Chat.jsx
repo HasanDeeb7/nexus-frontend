@@ -19,7 +19,6 @@ function Chat({ chatData, activeChat, setChatData, setActiveChat }) {
     if (newMessage.trim() === "" || !newMessage) {
       return;
     }
-    console.log(chatData);
     socket.emit("send-message", {
       sender: user,
       receiver: activeChat,
@@ -39,7 +38,6 @@ function Chat({ chatData, activeChat, setChatData, setActiveChat }) {
   }
   useEffect(() => {
     socket.on("receive-message", (data) => {
-      console.log(chatData);
       if (activeChat === data.sender.username) {
         setChatData([
           ...chatData,
@@ -51,7 +49,7 @@ function Chat({ chatData, activeChat, setChatData, setActiveChat }) {
         ]);
       }
     });
-    console.log(chatData);
+    
   }, [chatData]);
 
   useEffect(() => {
@@ -66,14 +64,13 @@ function Chat({ chatData, activeChat, setChatData, setActiveChat }) {
       });
     }
   };
-  console.log(chatData);
 
   return (
     <div className={style.chat}>
       {activeChat && <HiArrowUturnLeft onClick={() => setActiveChat(null)} className={style.arrowIcon} />}
       <img src={pattern1} alt="" className={style.bgImage} />
       <div className={style.chatDataContainer} ref={messageEl}>
-        {chatData.map((message) => (
+        {chatData.map((message, idx) => (
           //   <div
           //     className={` ${style.chatMessage} ${
           //       message.sender.username === user.username
@@ -81,7 +78,7 @@ function Chat({ chatData, activeChat, setChatData, setActiveChat }) {
           //         : style.receiver
           //     }`}
           //   >
-          <div className={style.chatWrapper}>
+          <div className={style.chatWrapper} key={idx}>
             <ChatMessage
               username={message.sender.username}
               message={message.content}

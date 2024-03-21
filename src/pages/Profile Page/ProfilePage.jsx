@@ -56,6 +56,8 @@ function ProfilePage() {
         );
         if (res) {
           setUserProfile(res.data.targetUser);
+           (res.data.targetUser)
+           (res.data?.user?.friends);
           setUser({ ...user, friends: res.data?.user?.friends });
           if (res.data.action === "add") {
             socket.emit("friend-add", { user: user, targetUser: username });

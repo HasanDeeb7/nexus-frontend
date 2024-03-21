@@ -18,13 +18,13 @@ function ChatPage() {
     getChat(user);
   }
   async function getChat(targetUser) {
-    console.log(targetUser);
+     (targetUser);
     try {
       const response = await axios.get(`${import.meta.env.VITE_ENDPOINT}room`, {
         params: { targetUser: targetUser },
       });
       if (response) {
-        console.log(response.data);
+         (response.data);
         setChatData(response.data.messages);
         setLoading(false);
       }

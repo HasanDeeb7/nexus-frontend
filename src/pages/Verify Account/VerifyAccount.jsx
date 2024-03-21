@@ -26,7 +26,7 @@ function VerifyAccount() {
       setProgress(50);
 
       if (response) {
-        console.log(response);
+         (response);
         setLoading(false);
         setCodeSent(true);
         setProgress(100);
@@ -44,7 +44,7 @@ function VerifyAccount() {
         { code: verificationCode }
       );
       if (response) {
-        console.log(response.data);
+         (response.data);
         setUser({ ...user, isVerified: true });
         setProgress(100);
         navigate("/avatar");

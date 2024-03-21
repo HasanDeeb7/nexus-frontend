@@ -86,3 +86,8 @@
   color: red;
   font-weight: 700;
 }
+@media (max-width: 430px) {
+  .registrationModal {
+    width: 90%;
+  }
+}

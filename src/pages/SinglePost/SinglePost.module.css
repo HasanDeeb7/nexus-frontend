@@ -6,6 +6,7 @@
   flex-direction: row-reverse;
   padding: 50px 0;
 }
+
 .userInfo {
   position: relative;
   width: 400px;
@@ -74,6 +75,7 @@
   object-fit: cover;
 }
 .postPreview {
+  position: relative;
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
@@ -85,6 +87,54 @@
   background: #0d0d0d;
   transition: all 0.3s;
   max-width: 578px;
+}
+.kebabMenu {
+  position: absolute;
+  right: 15px;
+  top: 25px;
+  cursor: pointer;
+}
+.kebabMenu > svg {
+  font-size: 20px;
+  transform: rotate(90deg);
+}
+.kebabMenu:hover > svg {
+  color: grey;
+}
+.menuItem {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+.menuItem:nth-child(1) {
+  border-radius: 8px 8px 0 0;
+}
+.menuItem:nth-child(2) {
+  border-radius: 0 0 8px 8px;
+}
+.menuItem:hover {
+  background-color: #949393;
+}
+.menuItem > svg {
+  /* min-width: 20px; */
+}
+.menuDialog {
+  position: absolute;
+  width: 100px;
+  background-color: var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+  top: 23px;
+  right: 35px;
+  border-radius: 8px;
+  z-index: 50;
+}
+.menuDialog > li {
+  list-style-type: none;
 }
 .detail {
   display: flex;
@@ -291,4 +341,19 @@
 }
 .commentBtn:hover {
   filter: brightness(0.7);
+}
+
+@media (max-width: 800px) {
+  .userInfo {
+    display: none;
+  }
+}
+@media (max-width: 430px) {
+  .postPreviewContainer {
+    padding-inline: 10px;
+  }
+  .commentInput {
+    height: 70px;
+    font-size: 10px;
+  }
 }

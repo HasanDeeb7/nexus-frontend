@@ -39,7 +39,7 @@ function NavBar({ outlet = false, minimal = false, handleNavigate }) {
         `${import.meta.env.VITE_ENDPOINT}notification/all-read`
       );
       if (response) {
-        console.log(response.data);
+         (response.data);
       }
     } catch (error) {
       console.log(error);
@@ -78,19 +78,7 @@ function NavBar({ outlet = false, minimal = false, handleNavigate }) {
   }, [notifications.length]);
 
   async function search() {
-    console.log(query);
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_ENDPOINT}search`,
-        { params: { query: query } }
-      );
-      if (response) {
-        console.log(response.data);
-        navigate("/search", { state: { data: response.data, query: query } });
-      }
-    } catch (error) {
-      console.log(response);
-    }
+    navigate(`/search/${query}`);
   }
   function handleKeyDown(e) {
     if (e.key === "Enter") {
@@ -98,21 +86,6 @@ function NavBar({ outlet = false, minimal = false, handleNavigate }) {
       search();
     }
   }
-
-  // const keyDownHandler = (event) => {
-  //   if (event.key === "Enter") {
-  //     event.preventDefault();
-
-  //     search();
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   document.addEventListener("keydown", keyDownHandler);
-  //   return () => {
-  //     document.removeEventListener("keydown", keyDownHandler);
-  //   };
-  // }, [query]);
 
   return (
     <AnimatePresence>
@@ -200,6 +173,13 @@ function NavBar({ outlet = false, minimal = false, handleNavigate }) {
                       size={20}
                       color="#959DA5"
                       className={style.searchIcon}
+                    />
+                  </div>
+                  <div className={style.searchIconContainer}>
+                    <LuSearch
+                      size={20}
+                      className={style.miniSearchIcon}
+                      onClick={() => navigate("/search")}
                     />
                   </div>
                   <ul className={style.navItemsContainer}>

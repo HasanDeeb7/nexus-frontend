@@ -37,7 +37,20 @@
   padding: 0;
   transition: all 0.2s;
 }
-
+.button:hover:before,
+.button:hover:after {
+  background-color: rgba(115, 38, 126, .6);
+  bottom: -1px;
+}
+/* .button:hover:before, */
+.button:active:after {
+  background-color: rgba(115, 38, 126, 1);
+  bottom: -1px;
+}
+.button:active::before {
+  background-color: rgba(115, 38, 126, 1);
+  top: -1px;
+}
 .button:before {
   top: -2px;
   width: 250px;
@@ -53,7 +66,6 @@
   box-shadow: none;
   background: transparent;
 }
-
 
 /* Button Border Style */
 
@@ -78,4 +90,22 @@
 }
 .disabledBtn {
   pointer-events: none;
+}
+@media (max-width: 400px) {
+  .button {
+    width: 210px;
+  }
+  .button::before,
+  .button::after {
+    width: 210px;
+  }
+}
+@media (max-width: 330px) {
+  .button {
+    width: 180px;
+  }
+  .button::before,
+  .button::after {
+    width: 180px;
+  }
 }

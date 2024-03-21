@@ -105,8 +105,8 @@ function GameCard({
             {game.users?.length || 0} Players
           </p>
           <div className={style.platformsContainer}>
-            {renderPlatforms().map((item) => {
-              return item;
+            {renderPlatforms().map((item, idx) => {
+              return <div key={idx}>{item}</div>;
             })}
           </div>
         </div>

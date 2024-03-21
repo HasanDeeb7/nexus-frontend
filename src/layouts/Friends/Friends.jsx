@@ -5,10 +5,12 @@ import { FaPlaystation } from "react-icons/fa6";
 import Avvvatars from "avvvatars-react";
 import { useUserStore } from "../../Store/userStore";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Friends({ title, user: userProfile }) {
+  const btnsRef = useRef([]);
+  const pushRef = (el) => btnsRef.current.push(el);
   const navigate = useNavigate();
   const { user, setUser } = useUserStore();
   const [friends, setFriends] = useState(userProfile.friends);
@@ -17,7 +19,16 @@ function Friends({ title, user: userProfile }) {
     Xbox: <LiaXbox className={`${style.platformIcon} ${style.XboxIcon}`} />,
     PC: <LuPcCase className={`${style.platformIcon} ${style.PCIcon}`} />,
   };
-  async function removeFriend(username) {
+  async function removeFriend(username, item) {
+    if (user.friends.some((friend) => friend.username === username)) {
+      setUser({
+        ...user,
+        friends: user.friends.filter((friend) => friend.username !== username),
+      });
+    } else {
+      setUser({ ...user, friends: [...user.friends, { username: username }] });
+    }
+     (user.friends.filter((friend) => friend.username !== username));
     if (username) {
       try {
         const res = await axios.post(
@@ -26,9 +37,10 @@ function Friends({ title, user: userProfile }) {
         );
         if (res) {
           //   setUserProfile(res.data.targetUser);
-          console.log(res.data.user.friends);
+           (res.data.user.friends);
           setUser({ ...user, friends: res.data?.user?.friends });
-          setFriends(res.data?.user?.friends);
+          // setFriends([...friends]);
+           (user);
         }
       } catch (error) {
         console.log(error);
@@ -40,15 +52,25 @@ function Friends({ title, user: userProfile }) {
   }
 
   useEffect(() => {
-    console.log("effect");
-  }, [friends]);
+     (friends);
+     (userProfile);
+    setFriends(userProfile.friends || []);
+  }, [userProfile, friends]);
   return (
     <>
       {title && <h2 className={style.title}>{title}</h2>}
       <div className={style.friendsSection}>
         {friends.map((item, idx) => (
           <div
-            onClick={() => navigate(`/profile/${item.username}`)}
+            onClick={(e) => {
+              if (
+                btnsRef.current.some((ref) => ref && ref.contains(e.target))
+              ) {
+                return;
+              } else {
+                navigate(`/profile/${item.username}`);
+              }
+            }}
             className={style.friend}
             style={{
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url(${
@@ -72,8 +94,8 @@ function Friends({ title, user: userProfile }) {
               <p className={style.friendUsername}>{item.username}</p>
             </div>
             <div className={style.platforms}>
-              {item.platforms.map((item, idx) => (
-                <div className={style.singlePlatform}>
+              {item.platforms?.map((item, idx) => (
+                <div className={style.singlePlatform} key={idx}>
                   <div className={style.platIcon}>
                     {platformIcons[item.name]}
                   </div>
@@ -81,12 +103,23 @@ function Friends({ title, user: userProfile }) {
                 </div>
               ))}
             </div>
-            {user.username === userProfile.username && (
+            {user.friends.some(
+              (friend) => friend.username === item.username
+            ) ? (
               <button
+                ref={pushRef}
                 className={style.removeFriendBtn}
                 onClick={() => removeFriend(item.username)}
               >
-                Leave
+                Remove
+              </button>
+            ) : (
+              <button
+                ref={pushRef}
+                className={style.addFriendBtn}
+                onClick={() => removeFriend(item.username)}
+              >
+                Add
               </button>
             )}
           </div>

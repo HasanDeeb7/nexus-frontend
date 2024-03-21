@@ -18,19 +18,19 @@ function ProfileHero({ userProfile, addFriend }) {
     PS: (
       <FaPlaystation
         className={`${style.platformIcon} ${style.PSIcon}`}
-        ref={pushRef}
+        // ref={pushRef}
       />
     ),
     Xbox: (
       <LiaXbox
         className={`${style.platformIcon} ${style.XboxIcon}`}
-        ref={pushRef}
+        // ref={pushRef}
       />
     ),
     PC: (
       <LuPcCase
         className={`${style.platformIcon} ${style.PCIcon}`}
-        ref={pushRef}
+        // ref={pushRef}
       />
     ),
   };
@@ -51,7 +51,7 @@ function ProfileHero({ userProfile, addFriend }) {
       document.removeEventListener("click", handleDialog);
     };
   }, []);
-  useEffect(() => console.log("first"), [user]);
+  useEffect(() => {}, [user]);
 
   return (
     <div className={style.heroSection}>
@@ -62,83 +62,88 @@ function ProfileHero({ userProfile, addFriend }) {
       </div>
       {/* <img src="" alt="" /> */}
       <div className={style.blurredLayer}></div>
-      <div className={style.userHeroSection}>
-        <div className={style.userInfoWrapper}>
-          <figure className={style.imageWrapper}>
-            {userProfile.avatar ? (
-              <img
-                src={`${import.meta.env.VITE_ENDPOINT}${userProfile.avatar}`}
-                alt=""
-                className={style.userAvatar}
-              />
-            ) : (
-              <Avvvatar value={userProfile.username} size={120} />
-            )}
-            {user._id != userProfile._id ? (
-              user.friends?.some((item) => item._id === userProfile._id) ? (
-                <button className={style.removeFriend} onClick={addFriend}>
-                  Leave
-                </button>
+      <div className={style.heroContent}>
+        <div className={style.userHeroSection}>
+          <div className={style.userInfoWrapper}>
+            <figure className={style.imageWrapper}>
+              {userProfile.avatar ? (
+                <img
+                  src={`${import.meta.env.VITE_ENDPOINT}${userProfile.avatar}`}
+                  alt=""
+                  className={style.userAvatar}
+                />
               ) : (
-                <button className={style.addFriendBtn} onClick={addFriend}>
-                  Join
-                </button>
-              )
-            ) : (
-              ""
-            )}
-          </figure>
-          <div className={style.userNameAndPlatforms}>
-            <span className={style.userName}>{userProfile.username}</span>
-            <span className={style.platformIconsContainer}>
-              {userProfile.platforms?.map((item, idx) => (
-                <div
-                  className={style.singleIconContainer}
-                  key={idx}
-                  ref={pushRef}
-                  onClick={() => setActiveDialog(item.name)}
-                >
-                  {platformIcons[item.name]}
-                  <AnimatePresence mode="wait">
-                    {activeDialog === item.name && (
-                      <>
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className={`${style.platformDialog} ${
-                            style[platformDialogs[item.name]]
-                          }`}
-                        >
-                          <span className={style.dialogIcon}>
-                            {platformIcons[item.name]}
-                          </span>
-                          <span className={style.dialogUsername}>
-                            {item.username}
-                          </span>
-                        </motion.div>
-                      </>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
-            </span>
+                <Avvvatar
+                  value={userProfile.username}
+                  size={window.innerWidth > 430 ? 120 : 80}
+                />
+              )}
+              {user._id != userProfile._id ? (
+                user.friends?.some((item) => item._id === userProfile._id) ? (
+                  <button className={style.removeFriend} onClick={addFriend}>
+                    Leave
+                  </button>
+                ) : (
+                  <button className={style.addFriendBtn} onClick={addFriend}>
+                    Join
+                  </button>
+                )
+              ) : (
+                ""
+              )}
+            </figure>
+            <div className={style.userNameAndPlatforms}>
+              <span className={style.userName}>{userProfile.username}</span>
+              <span className={style.platformIconsContainer}>
+                {userProfile.platforms?.map((item, idx) => (
+                  <div
+                    className={style.singleIconContainer}
+                    key={idx}
+                    ref={pushRef}
+                    onClick={() => setActiveDialog(item.name)}
+                  >
+                    {platformIcons[item.name]}
+                    <AnimatePresence mode="wait">
+                      {activeDialog === item.name && (
+                        <>
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className={`${style.platformDialog} ${
+                              style[platformDialogs[item.name]]
+                            }`}
+                          >
+                            <span className={style.dialogIcon}>
+                              {platformIcons[item.name]}
+                            </span>
+                            <span className={style.dialogUsername}>
+                              {item.username}
+                            </span>
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={style.userActivityContainer}>
-        <div className={style.userActivityWrapper}>
-          <div className={style.singleDetail}>
-            <span>{userProfile.posts.length}</span>
-            <span>Posts Made</span>
-          </div>
-          <div className={style.singleDetail}>
-            <span>{userProfile.friends.length}</span>
-            <span>Teammates</span>
-          </div>
-          <div className={style.singleDetail}>
-            <span>{userProfile.games.length}</span>
-            <span>Games</span>
+        <div className={style.userActivityContainer}>
+          <div className={style.userActivityWrapper}>
+            <div className={style.singleDetail}>
+              <span>{userProfile.posts.length}</span>
+              <span>Posts Made</span>
+            </div>
+            <div className={style.singleDetail}>
+              <span>{userProfile.friends.length}</span>
+              <span>Teammates</span>
+            </div>
+            <div className={style.singleDetail}>
+              <span>{userProfile.games.length}</span>
+              <span>Games</span>
+            </div>
           </div>
         </div>
       </div>

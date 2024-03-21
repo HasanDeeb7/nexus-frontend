@@ -24,7 +24,7 @@ function PublicChat() {
       username: user.username,
       time: new Date(),
     });
-    console.log(messages);
+     (messages);
     setNewMessage("");
   }
 

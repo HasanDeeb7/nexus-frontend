@@ -300,4 +300,13 @@
   .postPreviewContainer {
     width: 100%;
   }
+  .selectContainers{
+    flex-direction: column;
+  }
+  .selectWrapper{
+    width: 100%;
+  }
+  .selectWrapper > label{
+    width: 50px;
+  }
 }

@@ -8,7 +8,7 @@ import { useUserStore } from "../../Store/userStore";
 
 function PostsLayout({ url, userId, miniPost = false, all = false }) {
   const [debounceTimer, setDebounceTimer] = useState(null);
-  const { posts, setPosts } = usePostStore();
+  const { posts, setPosts } = usePostStore(); 
   const { setLoadingWall } = useLoadingStore();
   const [loading, setLoading] = useState(true);
   const [pageSize, setPageSize] = useState(miniPost ? 30 : 5);
@@ -37,7 +37,7 @@ function PostsLayout({ url, userId, miniPost = false, all = false }) {
             setHasMore(false);
           }
         } else {
-          console.log("No data foundd");
+           ("No data foundd");
           setLoading(false);
         }
       } catch (error) {
@@ -71,7 +71,7 @@ function PostsLayout({ url, userId, miniPost = false, all = false }) {
 
   useEffect(() => {
     getPosts();
-    console.log(posts);
+     (posts);
   }, [pageSize]);
 
   useEffect(() => {

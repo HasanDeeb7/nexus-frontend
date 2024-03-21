@@ -40,13 +40,12 @@
   font-size: 25px;
   position: absolute;
   left: 50%;
-  top: 38%;
-  transform: translate(-45%, -100px);
+  top: 35%;
+  transform: translate(-50%, -100px);
   border-radius: 10px;
 }
 .neonText {
   font-size: 48px;
-
   color: white;
   text-shadow: 0 0 10px #fff, 0 0 20px var(--primary-color),
     0 0 30px var(--secondary-color), 0 0 30px var(--primary-color),

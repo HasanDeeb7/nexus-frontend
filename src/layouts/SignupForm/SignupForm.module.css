@@ -24,3 +24,8 @@
   font-weight: 700;
   margin: 0;
 }
+@media (max-width: 430px) {
+  .inputsContainer {
+    width: 90%;
+  }
+}

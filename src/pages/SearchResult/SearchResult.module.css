@@ -17,17 +17,49 @@
   background-color: var(--primary-color);
 }
 .sectionTabs {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .sectionTabs > ul {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style: none;
-    background-color: #121212;
-    margin-bottom: 20px;
-  }
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sectionTabs > ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  background-color: #121212;
+  margin-bottom: 20px;
+}
+.searchInput {
+  color: white;
+  padding: 15px 10px;
+  width: 100%;
+  border-radius: 7px;
+  background-color: #0d0f13;
+  outline: none;
+  border: 1px solid transparent;
+  transition: border-color 0.25s ease, outline 0.15s ease;
+  padding-inline: 20px;
+}
+.searchIcon {
+  position: absolute;
+  right: 15px;
+}
+.searchContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-block: 20px;
+  padding-inline: 10px;
+  min-width: 200px;
+}
+.loadingContainer {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 48px); /* 48 is half the size of the spinner */
+}
+.notFoundQuery {
+  font-size: 20px;
+}

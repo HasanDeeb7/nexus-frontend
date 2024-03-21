@@ -4,7 +4,7 @@ import { LuImagePlus } from "react-icons/lu";
 const DragAndDrop = ({ acceptedFiles, setAcceptedFiles, image, setImage }) => {
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
-    console.log(file);
+     (file);
     setAcceptedFiles(
       Object.assign({}, file, { preview: URL.createObjectURL(file) })
     );

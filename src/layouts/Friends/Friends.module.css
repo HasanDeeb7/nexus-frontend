@@ -69,6 +69,22 @@
   transition: all 0.3s;
   background-color: darkred;
 }
+.removeFriendBtn:hover {
+  filter: brightness(0.7);
+}
+.addFriendBtn {
+  margin-top: auto;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: all 0.3s;
+  background-color: var(--primary-color);
+}
+.addFriendBtn:hover {
+  filter: brightness(0.5);
+}
+
 @media (max-width: 470px) {
   .friendsSection {
     flex-direction: column;

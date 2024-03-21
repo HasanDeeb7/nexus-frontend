@@ -28,9 +28,16 @@
   width: 65%;
 }
 
+.btnsContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* --------------------Google Button ------------------ */
 
 .button {
+
   position: relative;
   display: flex;
   align-items: center;
@@ -84,4 +91,9 @@
 .button:hover > .buttonText {
   box-shadow: none;
   background: transparent;
+}
+@media (max-width: 430px) {
+  .inputsContainer{
+    width: 90%;
+  }
 }

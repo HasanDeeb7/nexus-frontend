@@ -242,8 +242,14 @@
     transform: translateX(-110px);
   }
   .searchContainer {
-    display: none;
+    /* display: none; */
   }
+}
+
+.miniSearchIcon {
+  color: white;
+  font-size: 25px;
+  display: none;
 }
 
 @media (max-width: 426px) {
@@ -255,5 +261,14 @@
   }
   .searchContainer {
     min-width: 100px;
+  }
+}
+
+@media (max-width: 790px) {
+  .searchContainer {
+    display: none;
+  }
+  .miniSearchIcon {
+    display: block;
   }
 }

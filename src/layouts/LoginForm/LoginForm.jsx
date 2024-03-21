@@ -10,6 +10,7 @@ import { useLoadingStore } from "../../Store/loadingStore";
 import { app } from "../../firebase";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { useNotificationStore } from "../../Store/notification";
+import { toast } from "react-toastify";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -28,7 +29,13 @@ function LoginForm() {
   });
 
   function handleKeyDown(e) {
+    setError({
+      username: false,
+      password: false,
+      network: false,
+    });
     if (e.key === "Enter") {
+      e.preventDefault();
       signIn();
     }
   }
@@ -38,6 +45,7 @@ function LoginForm() {
       Object.entries(credentials).some((item) => {
         if (item[1] === "" || !item[1]) {
           setError({ ...error, [item[0]]: true });
+          toast.error(`${item[0]} is required`);
           console.log(error);
           return true; // Returning true if the condition is met
         }
@@ -52,7 +60,7 @@ function LoginForm() {
         credentials
       );
       if (response) {
-        console.log(response.data);
+         (response.data);
         setUser(response.data);
         setNotifications(response.data.notifications);
         setLoading(false);
@@ -62,19 +70,27 @@ function LoginForm() {
         }, 1000);
       }
     } catch (error) {
-      setError({ ...error, network: true });
+      if (error.response?.data?.error === "Wrong Password") {
+        setError({ ...error, password: true });
+      } else if (error.response?.data?.error === "User doesn't exist!") {
+        setError({ ...error, username: true });
+      } else {
+        setError({ ...error, network: true });
+      }
       console.log(error);
       setLoading(false);
     }
   }
-
+  const handleRemoveError = () => {
+     ("remove errro");
+  };
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
-      console.log(result);
+       (result);
 
       const res = await axios.post(
         ` ${import.meta.env.VITE_ENDPOINT}user/withGoogle`,
@@ -110,6 +126,8 @@ function LoginForm() {
       className={style.loginFormContainer}
     >
       {error.network && <h1 style={{ color: "#ff1020" }}>Network Error</h1>}
+      {error.password && <h1 style={{ color: "#ff1020" }}>Wrong Password!</h1>}
+      {error.username && <h1 style={{ color: "#ff1020" }}>User Not Found!</h1>}
       <div className={style.inputsContainer}>
         <Input
           value={credentials}
@@ -118,6 +136,7 @@ function LoginForm() {
           control={"username"}
           isDisabled={loading}
           onKeyDown={handleKeyDown}
+          removeError={handleRemoveError}
         />
         <Input
           value={credentials}
@@ -127,13 +146,14 @@ function LoginForm() {
           type="password"
           isDisabled={loading}
           onKeyDown={handleKeyDown}
+          removeError={handleRemoveError}
         />
       </div>
       <div className={style.btnsContainer}>
         <HexButton onClick={signIn} isDisabled={loading} text={"Sign In"} />
-        <button onClick={handleGoogleClick} className={`${style.button}`}>
+        {/* <button onClick={handleGoogleClick} className={`${style.button}`}>
           Continue with google
-        </button>
+        </button> */}
       </div>
     </motion.div>
   );

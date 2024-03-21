@@ -36,11 +36,9 @@ function App() {
         );
         if (response) {
           setUser(response.data);
-          console.log(response.data.notifications);
           setNotifications(response.data.notifications);
           setLoading(false);
         } else {
-          console.log("No data");
           setLoading(false);
         }
       }
@@ -57,7 +55,6 @@ function App() {
   useEffect(() => {
     if (user) {
       socket.on("connect", () => {
-        console.log(socket.connected);
       });
       socket.emit("join-room", user.username);
 
@@ -74,7 +71,6 @@ function App() {
         setNotifications((prevNotifications) => [...prevNotifications, data]);
       });
       socket.on("receive-message", (data) => {
-        console.log(data);
         if (!privateChatOpen) {
           toast(
             <CustomToast

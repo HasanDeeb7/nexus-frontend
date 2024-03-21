@@ -1,7 +1,6 @@
 .profilePage {
   display: flex;
   flex-direction: column;
-  
 }
 .heroSection {
   width: 100%;
@@ -33,6 +32,16 @@
   border-radius: 100%;
   position: relative;
 }
+.heroContent {
+  position: absolute;
+  bottom: 75px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: 30px;
+  /* z-index: 1000; */
+}
 .userInfoWrapper {
   display: flex;
   align-items: center;
@@ -43,9 +52,7 @@
   border: 1px solid transparent;
 }
 .userHeroSection {
-  position: absolute;
-  bottom: 75px;
-  left: 30px;
+  min-width: 357px;
 }
 .addFriendBtn {
   position: absolute;
@@ -156,11 +163,17 @@
   border: 1px solid transparent;
   height: 161.6px;
 }
-.userActivityContainer {
+/* .userActivityContainer {
   position: absolute;
   bottom: 75px;
   right: 30px;
-  /* height: 160px; */
+  height: 160px;
+} */
+.userActivityContainer {
+  min-width: 357px;
+}
+.userActivityWrapper {
+  justify-content: space-between;
 }
 .singleDetail {
   height: 80px;
@@ -176,4 +189,67 @@
 .singleDetail > span:nth-child(2) {
   font-weight: 400;
   font-size: 14px;
+}
+
+@media (max-width: 433px) {
+  .heroContent {
+    flex-direction: column;
+    bottom: 10px;
+    height: 100%;
+    padding: 30px 10px;
+    align-items: center;
+  }
+  .userActivityWrapper {
+    height: 120px;
+    /* gap: 10px; */
+  }
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* z-index: 20000; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .userActivityContainer {
+    min-width: auto;
+  }
+  .singleDetail {
+    height: 40px;
+  }
+  .singleDetail > span:nth-child(2) {
+    font-size: 12px;
+  }
+  .userActivityContainer,
+  .userHeroSection {
+    min-width: 250px;
+  }
+
+  .userName {
+    font-size: 15px;
+  }
+
+  .imageWrapper,
+  .userAvatar {
+    width: 80px;
+    height: 80px;
+  }
+  .addFriendBtn,
+  .removeFriend {
+    bottom: -7px;
+    left: 10px;
+    padding: 7px 20px;
+  }
+  .blurredLayer {
+    object-fit: cover;
+    height: 350px;
+  }
+  .bgVideo {
+    object-fit: cover;
+    height: 500px;
+  }
+  .heroSection {
+    height: 350px;
+  }
 }

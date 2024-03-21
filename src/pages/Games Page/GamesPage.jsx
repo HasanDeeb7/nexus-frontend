@@ -41,7 +41,7 @@ function GamesPage() {
         { games: gameIds }
       );
       if (response) {
-        console.log("Your games have been updated.");
+         ("Your games have been updated.");
         setLoadingWall(true);
         setTimeout(() => {
           navigate("/home", { replace: true });
@@ -106,7 +106,7 @@ function GamesPage() {
     !loading && (
       <div
         className={style.gamesPageContainer}
-        onClick={console.log(selectedGames)}
+        onClick={ (selectedGames)}
       >
         <h1>Select your favorite games!</h1>
         <header className={style.pageHeader}>

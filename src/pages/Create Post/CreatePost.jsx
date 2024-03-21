@@ -8,8 +8,9 @@ import { LuHeart } from "react-icons/lu";
 import { LuHeartCrack } from "react-icons/lu";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 function CreatePost() {
+  const postId = useParams().post_id;
   const { user } = useUserStore();
   const [games, setGames] = useState();
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ function CreatePost() {
   const [gameQuery, setGameQuery] = useState("");
   const [image, setImage] = useState();
   const [debounceTimer, setDebounceTimer] = useState(null);
+  const [imageLink, setImageLink] = useState("");
   const navigate = useNavigate();
 
   async function getGames() {
@@ -35,12 +37,12 @@ function CreatePost() {
     }
   }
   function getGameOptions() {
-    return games.map((game) => (
+    return games.map((game, idx) => (
       <section
+        key={idx}
         className={style.gameInfo}
         onClick={() => {
           setGameQuery(game);
-          console.log(game);
         }}
       >
         <img
@@ -52,14 +54,34 @@ function CreatePost() {
       </section>
     ));
   }
+  async function getOnePost() {
+    const response = await axios.get(
+      `${import.meta.env.VITE_ENDPOINT}post/one`,
+      { params: { postId: postId } }
+    );
+    if (response) {
+      response.data;
+      setPostType(response.data.type);
+      setCaption(response.data.caption);
+      setSpoiler(response.data.isSpoiler);
+      setGameQuery(response.data.game);
+      setImageLink(response.data.image);
+    }
+  }
+  useEffect(() => {
+    if (postId) {
+      getOnePost();
+    }
+  }, []);
   function getTypesOptions() {
-    return ["News", "Meme", "Game Shot", "Help"].map((type) => (
+    return ["News", "Meme", "Game Shot", "Help"].map((type, idx) => (
       <section
         className={style.postType}
         onClick={() => {
           setPostType(type);
-          console.log("second");
+          ("second");
         }}
+        key={idx}
       >
         <p className={style.typeText}>{type}</p>
       </section>
@@ -86,38 +108,45 @@ function CreatePost() {
     }, 300);
     setDebounceTimer(newTimer);
   }
-  async function createPost() {
-    if (!acceptedFiles || acceptedFiles.length === 0) {
-      console.log("No files selected.");
-      // return;
+  async function submit() {
+    if (!gameQuery.name) {
+      return toast.error("Please Select a valid game");
     }
-    console.log(acceptedFiles);
-    if (
-      [acceptedFiles, gameQuery, postType].some(
-        (value) => !value || value === ""
-      )
-    ) {
-      return toast.error("All fields are required");
-    }
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_ENDPOINT}post/create`,
-        {
-          game: gameQuery,
-          caption: caption,
-          type: postType,
-          image: image,
-          isSpoiler: spoiler,
-        },
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-      if (response) {
-        console.log(response.data);
-        navigate("/home");
-        toast("Post created Successfully");
+    if (postId) {
+      updatePost();
+    } else {
+      if (!acceptedFiles || acceptedFiles.length === 0) {
+        ("No files selected.");
+        // return;
       }
-    } catch (error) {
-      console.log(error);
+      acceptedFiles;
+      if (
+        [acceptedFiles, gameQuery, postType].some(
+          (value) => !value || value === ""
+        )
+      ) {
+        return toast.error("All fields are required");
+      }
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_ENDPOINT}post/create`,
+          {
+            game: gameQuery,
+            caption: caption,
+            type: postType,
+            image: image,
+            isSpoiler: spoiler,
+          },
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+        if (response) {
+          response.data;
+          navigate("/home");
+          toast("Post created Successfully");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
   const handleKeyPress = (event) => {
@@ -125,6 +154,27 @@ function CreatePost() {
       event.preventDefault(); // Prevent default behavior of Enter key
     }
   };
+  async function updatePost() {
+    try {
+      const response = await axios.patch(
+        `${import.meta.env.VITE_ENDPOINT}post/edit`,
+        {
+          postId,
+          caption,
+          isSpoiler: spoiler,
+          game: gameQuery,
+          postType: postType,
+          image: image ? image : null,
+        },
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      if (response) {
+        navigate("/home");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     getGames();
@@ -187,12 +237,8 @@ function CreatePost() {
                 }}
               />
             </div>
-            <button
-              type="button"
-              onClick={createPost}
-              className={style.submitBtn}
-            >
-              Submit
+            <button type="button" onClick={submit} className={style.submitBtn}>
+              {postId ? "Update" : "Submit"}
             </button>
           </div>
           <div className={style.postPreviewContainer}>
@@ -227,6 +273,13 @@ function CreatePost() {
                   <figure className={style.previewImageContainer}>
                     <img
                       src={acceptedFiles.preview}
+                      className={style.previewImage}
+                    />
+                  </figure>
+                ) : imageLink ? (
+                  <figure className={style.previewImageContainer}>
+                    <img
+                      src={`${import.meta.env.VITE_ENDPOINT}${imageLink}`}
                       className={style.previewImage}
                     />
                   </figure>
