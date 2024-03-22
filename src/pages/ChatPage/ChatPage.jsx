@@ -24,7 +24,6 @@ function ChatPage() {
         params: { targetUser: targetUser },
       });
       if (response) {
-         (response.data);
         setChatData(response.data.messages);
         setLoading(false);
       }

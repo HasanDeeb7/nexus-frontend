@@ -65,7 +65,9 @@ function SignupForm() {
       });
     }
     if (
-      !newUser.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+      !newUser.email
+        .trim()
+        .match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
     ) {
       return setError({
         ...error,
@@ -82,7 +84,6 @@ function SignupForm() {
       );
       if (response) {
         setProgress(80);
-         (response.data);
         setUser(response.data);
         setNotifications(
           response.data.notifications?.filter((item) => item.isRead)

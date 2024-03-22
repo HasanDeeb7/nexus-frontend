@@ -42,6 +42,10 @@
 .gameName {
   font-weight: 700;
   cursor: pointer;
+  width: 135px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .gameName:hover {
   color: var(--primary-color);
@@ -56,6 +60,9 @@
   border-radius: 5px;
   font-size: 10px;
   cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .gameGenre:hover {
   filter: brightness(0.8);

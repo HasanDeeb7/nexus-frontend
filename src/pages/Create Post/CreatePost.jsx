@@ -60,7 +60,6 @@ function CreatePost() {
       { params: { postId: postId } }
     );
     if (response) {
-      response.data;
       setPostType(response.data.type);
       setCaption(response.data.caption);
       setSpoiler(response.data.isSpoiler);
@@ -140,7 +139,6 @@ function CreatePost() {
           { headers: { "Content-Type": "multipart/form-data" } }
         );
         if (response) {
-          response.data;
           navigate("/home");
           toast("Post created Successfully");
         }

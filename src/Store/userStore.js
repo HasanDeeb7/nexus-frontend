@@ -11,7 +11,6 @@ export const useUserStore = create(
           `${import.meta.env.VITE_ENDPOINT}user/logout`
         );
         if (response) {
-           (response.data);
           set({ user: null });
         }
       } catch (error) {

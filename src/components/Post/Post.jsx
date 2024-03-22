@@ -39,7 +39,7 @@ function Post({ post, miniPost = false }) {
         { postId: post._id, reaction: "Like" }
       );
       if (response.status === 200) {
-         (response.data);
+        response.data;
         setReaction(true);
         setLikes((prev) => prev + 1);
       }
@@ -54,7 +54,6 @@ function Post({ post, miniPost = false }) {
         { postId: post._id }
       );
       if (response) {
-         (response.data);
         setReaction(false);
         setLikes((prev) => prev - 1);
       }
@@ -70,10 +69,10 @@ function Post({ post, miniPost = false }) {
         { params: { id: post._id } }
       );
       if (response) {
-         (response.data);
         toast("Post deleted successfully");
         setPosts(posts.filter((item) => post._id !== item._id));
         setIsMenuOpen(false);
+        setIsModalOpen(false);
       } else {
         toast.error("An error has occured ");
       }

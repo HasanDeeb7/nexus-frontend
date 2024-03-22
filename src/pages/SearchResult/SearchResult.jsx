@@ -35,7 +35,6 @@ function SearchResult() {
         { params: { query: searchQuery ? searchQuery : query } }
       );
       if (response) {
-         (response.data);
         setPosts(response.data.posts);
         setResults({
           ...results,

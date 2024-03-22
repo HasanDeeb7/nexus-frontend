@@ -49,7 +49,6 @@ function SinglePost() {
         { params: { id: post._id } }
       );
       if (response) {
-        response.data;
         toast("Post deleted successfully");
         setIsMenuOpen(false);
         navigate("/home");
@@ -111,7 +110,6 @@ function SinglePost() {
         { params: { postId: postId } }
       );
       if (response.status === 200) {
-        response.data;
         setComments(response.data);
         setLoading(false);
       }
@@ -164,7 +162,6 @@ function SinglePost() {
         }
       );
       if (response) {
-        response.data;
         setComments(response.data);
       }
     } catch (error) {

@@ -77,7 +77,6 @@ function UploadImage() {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       if (response) {
-         (response.data);
         setLoading(false);
         setUser(response.data.user);
       }

@@ -19,7 +19,6 @@ function Comment({ comment, onLike, idx, comments, setComments }) {
         { params: { commentId: comment._id, postId: comment.post } }
       );
       if (response) {
-         (response.data);
         const newComments = comments.filter((item, index) => item != comment);
         setComments(newComments);
 

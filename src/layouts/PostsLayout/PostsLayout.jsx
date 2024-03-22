@@ -5,10 +5,11 @@ import { usePostStore } from "../../Store/postStore";
 import axios from "axios";
 import Post from "../../components/Post/Post";
 import { useUserStore } from "../../Store/userStore";
+import { NavLink } from "react-router-dom";
 
 function PostsLayout({ url, userId, miniPost = false, all = false }) {
   const [debounceTimer, setDebounceTimer] = useState(null);
-  const { posts, setPosts } = usePostStore(); 
+  const { posts, setPosts } = usePostStore();
   const { setLoadingWall } = useLoadingStore();
   const [loading, setLoading] = useState(true);
   const [pageSize, setPageSize] = useState(miniPost ? 30 : 5);
@@ -37,7 +38,7 @@ function PostsLayout({ url, userId, miniPost = false, all = false }) {
             setHasMore(false);
           }
         } else {
-           ("No data foundd");
+          ("No data foundd");
           setLoading(false);
         }
       } catch (error) {
@@ -71,7 +72,7 @@ function PostsLayout({ url, userId, miniPost = false, all = false }) {
 
   useEffect(() => {
     getPosts();
-     (posts);
+    posts;
   }, [pageSize]);
 
   useEffect(() => {
@@ -87,9 +88,17 @@ function PostsLayout({ url, userId, miniPost = false, all = false }) {
         <section
           className={!miniPost ? style.postsSection : style.miniPostsSection}
         >
-          {posts.map((post, idx) => (
-            <Post post={post} key={idx} miniPost={miniPost} />
-          ))}
+          {posts.length > 0 ? (
+            posts.map((post, idx) => (
+              <Post post={post} key={idx} miniPost={miniPost} />
+            ))
+          ) : (
+            <p className={style.noPosts}>
+              No Posts Found, Try adding{" "}
+              <NavLink to={"/select-games"}> more games</NavLink> to your
+              selection
+            </p>
+          )}
         </section>
       </div>
     )

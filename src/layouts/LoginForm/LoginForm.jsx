@@ -60,7 +60,6 @@ function LoginForm() {
         credentials
       );
       if (response) {
-         (response.data);
         setUser(response.data);
         setNotifications(response.data.notifications);
         setLoading(false);
@@ -82,7 +81,7 @@ function LoginForm() {
     }
   }
   const handleRemoveError = () => {
-     ("remove errro");
+    console.log("remove errro");
   };
   const handleGoogleClick = async () => {
     try {
@@ -90,7 +89,7 @@ function LoginForm() {
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
-       (result);
+      console.log(result);
 
       const res = await axios.post(
         ` ${import.meta.env.VITE_ENDPOINT}user/withGoogle`,

@@ -24,7 +24,6 @@ function ProfilePlatform() {
         { platformName: platformName, username: username }
       );
       if (response) {
-         (response.data);
         setUser({ ...user, platforms: response.data.platforms });
       }
     } catch (error) {

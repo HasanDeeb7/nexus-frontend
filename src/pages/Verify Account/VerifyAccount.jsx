@@ -44,7 +44,6 @@ function VerifyAccount() {
         { code: verificationCode }
       );
       if (response) {
-        response.data;
         setUser({ ...user, isVerified: true });
         setProgress(100);
         navigate("/avatar");
