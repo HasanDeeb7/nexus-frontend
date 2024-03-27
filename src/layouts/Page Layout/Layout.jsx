@@ -4,10 +4,6 @@ import { Outlet } from "react-router-dom";
 import style from "./Layout.module.css";
 import NavBar from "../../components/NavBar/NavBar";
 import { useLoadingStore } from "../../Store/loadingStore";
-// import video from "/public/videos/bgVideo.mp4";
-// import pattern from "/public/images/pattern1.jpg";
-// import pattern2 from "/public/images/pattern2.jpg";
-// import pattern3 from "/public/images/pattern3.jpg";
 import PublicChat from "../PublicChat/PublicChat";
 
 function Layout() {

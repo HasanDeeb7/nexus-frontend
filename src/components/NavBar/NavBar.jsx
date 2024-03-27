@@ -11,7 +11,6 @@ import { IoChatbubblesOutline } from "react-icons/io5";
 import { LuMenu } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { result } from "lodash";
 import { useLoadingStore } from "../../Store/loadingStore";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNotificationStore } from "../../Store/notification";
@@ -39,7 +38,7 @@ function NavBar({ outlet = false, minimal = false, handleNavigate }) {
         `${import.meta.env.VITE_ENDPOINT}notification/all-read`
       );
       if (response) {
-         (response.data);
+        response.data;
       }
     } catch (error) {
       console.log(error);
@@ -121,7 +120,10 @@ function NavBar({ outlet = false, minimal = false, handleNavigate }) {
                     <li className={style.navItemWrapper}>
                       <NavLink
                         to={"/home"}
-                        onClick={() => setLoadingWall(true)}
+                        onClick={() => {
+                          setLoadingWall(true);
+                          setIsnavOpen(false);
+                        }}
                         className={({ isActive }) =>
                           isActive ? style.activeLink : style.navItem
                         }
@@ -133,8 +135,10 @@ function NavBar({ outlet = false, minimal = false, handleNavigate }) {
                     <li className={style.navItemWrapper}>
                       <NavLink
                         to={"/explore"}
-                        onClick={() => setLoadingWall(true)}
-                        className={({ isActive }) =>
+                        onClick={() => {
+                          setLoadingWall(true);
+                          setIsnavOpen(false);
+                        }}                        className={({ isActive }) =>
                           isActive ? style.activeLink : style.navItem
                         }
                       >

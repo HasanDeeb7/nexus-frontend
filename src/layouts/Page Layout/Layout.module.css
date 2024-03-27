@@ -13,7 +13,7 @@
   margin-inline: 60px;
 }
 .pageBackground {
-  background-image: url("/public/images/pattern3.webp");
+  background-image: url("/images/pattern3.webp");
   width: 100%;
   height: 100vh;
   z-index: -10;
@@ -34,7 +34,7 @@
     saturate(500%) contrast(1) blur(3px);
 }
 @media (max-width: 430px) {
-  .pageWrapper{
-    margin-inline:0 ;
+  .pageWrapper {
+    margin-inline: 0;
   }
 }
