@@ -6,7 +6,6 @@ import axios from "axios";
 import Post from "../../components/Post/Post";
 import PostsLayout from "../../layouts/PostsLayout/PostsLayout";
 // import image from "/public/images/fypage_portrait.jpg";
-import video from "/public/videos/bgVideo.mp4";
 function FYPage({ url }) {
   return (
     <>

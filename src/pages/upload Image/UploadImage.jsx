@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import style from "./UploadImage.module.css";
-import map from "/images/map.jpg";
+import map from "/images/map.webp";
 import { useUserStore } from "../../Store/userStore";
 import HexButton from "../../components/HexButton/HexButton";
 import axios from "axios";

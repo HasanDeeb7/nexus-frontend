@@ -1,6 +1,6 @@
 import style from "./Registration.module.css";
 import LoginForm from "../../layouts/LoginForm/LoginForm";
-import map from "/images/map.jpg";
+import map from "/images/map.webp";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SignupForm from "../../layouts/SignupForm/SignupForm";

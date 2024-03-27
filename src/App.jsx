@@ -13,9 +13,11 @@ import CustomToast from "./components/CustomToast/CustomToast";
 import { useNavigate } from "react-router-dom";
 import { useNotificationStore } from "./Store/notification";
 import { useChatStore } from "./Store/publicChat";
+import { useErrorStore } from "./Store/errorStore";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
-export const socket = io(import.meta.env.VITE_SOCKET);
-// export const socket = io("wss://nexus-backend-p3y6.onrender.com");
+// export const socket = io(import.meta.env.VITE_SOCKET);
+export const socket = io("wss://nexus-backend-p3y6.onrender.com");
 
 axios.defaults.withCredentials = true;
 
@@ -24,6 +26,7 @@ function App() {
   const { privateChatOpen } = useChatStore();
   const { user, setUser } = useUserStore();
   const { setNotifications } = useNotificationStore();
+  const { error, setError } = useErrorStore();
   const { proggressBar, setProgress, loadingWall, loading, setLoading } =
     useLoadingStore();
 
@@ -40,6 +43,7 @@ function App() {
           setLoading(false);
         } else {
           setLoading(false);
+          setError(true);
         }
       }
     } catch (error) {
@@ -54,8 +58,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      socket.on("connect", () => {
-      });
+      socket.on("connect", () => {});
       socket.emit("join-room", user.username);
 
       socket.on("friend-add-receive", (data) => {
@@ -90,6 +93,13 @@ function App() {
     <>
       <AnimatePresence>
         {loadingWall && <LoadingWall key={"Loading-Wall"} />}
+        {error && (
+          <ErrorPage
+            code={500}
+            text={"Internal Server Error!"}
+            key={"Error Page"}
+          />
+        )}
         {!loading ? (
           <>
             <LoadingBar

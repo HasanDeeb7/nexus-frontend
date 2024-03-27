@@ -5,11 +5,10 @@ import ac from "/images/silhouettes/ac.png";
 import kratos from "/images/silhouettes/godofwar.png";
 import nate from "/images/silhouettes/uncharted.png";
 import geralt from "/images/silhouettes/thewitcher.png";
-import video from "/videos/bgVideo.mp4";
+import video from "/videos/bgVideo.webm";
 import { useLoadingStore } from "../../Store/loadingStore";
 
 const HeroSection = () => {
-
   return (
     <div className={style.HeroSection}>
       <video autoPlay loop muted className={style.bgVideo}>

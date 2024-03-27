@@ -6,7 +6,7 @@ import { LuPcCase } from "react-icons/lu";
 import { AnimatePresence, animate, motion } from "framer-motion";
 import { useUserStore } from "../../Store/userStore";
 import Avvvatar from "avvvatars-react";
-import bgPattern from "/public/videos/bgPattern.mp4";
+import bgPattern from "/public/videos/bgPattern.webm";
 
 function ProfileHero({ userProfile, addFriend }) {
   const [activeDialog, setActiveDialog] = useState(false);

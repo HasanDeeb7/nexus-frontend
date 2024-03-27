@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useUserStore } from "../../Store/userStore";
 import style from "./VerifyAccount.module.css";
-import map from "/images/map.jpg";
+import map from "/images/map.webp";
 import axios from "axios";
 import VerificationInput from "react-verification-input";
 import { useNavigate } from "react-router-dom";
